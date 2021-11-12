@@ -6,7 +6,7 @@
         echo $nombre." ".$contra;
     }
 
-
+// Ey que pasa pollo
 
 
 ?>
