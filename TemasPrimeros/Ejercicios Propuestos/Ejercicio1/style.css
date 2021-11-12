@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: black;
+    color: white;
+}
+h1 {
+    text-align: center;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#centered {
+    text-align: center;
+}
+
+form {
+    margin: auto;
+    width: 100%;
+    /* border: 1px solid #73AD21; */
+}
+
+form p {
+    text-align: center;
+    background-color: whitesmoke;
+    color: black;
+    /* border: 1px solid white; */
+    font-size: 25px;
+    padding: 10px;
+}
+
+form input[type="submit"] {
+    font-size: 20px;
+    margin-top: 20px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+    background-color: whitesmoke;
+    color: black;
+    transition: 0.3s;
+}
+
+form input[type="submit"]:hover {
+    background-color: black;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+form input[type="text"] {
+    font-size: 15px;
+    margin: 4px 0px 4px 0px;
+    padding: 2px 0px 2px 0px;
+    width: 30%;
+    transition: 0.4s ease-in-out;
+    background-color: black;
+    color: white;
+    border: none;
+    border-bottom: 2px solid white;
+    margin-bottom: 35px;
+}
+
+form input[type="text"]:focus {
+    width: 50%;
+    outline: none;
+}
+
+form select {
+    font-size: 15px;
+    color: black;
+    margin: 4px 0px 4px 0px;
+    padding: 2px 0px 2px 0px;
+    width: 30%;
+    transition: 0.4s ease-in-out;
+    border: 1px solid white;
+    margin-bottom: 35px;
+}
+
+form select:hover {
+    cursor: pointer;
+}
+
+#resultado {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#resultado p {
+    margin: auto;
+    text-align: center;
+    /* border: 1px solid white; */
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 50%;
+}
+
+#error {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#error p {
+    margin: auto;
+    text-align: center;
+    color: red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 50%;
+}

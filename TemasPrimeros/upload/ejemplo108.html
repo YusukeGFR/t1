@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <title>Mi diseño</title>
+ <meta charset="UTF-8" />
+ <style>
+#tabla {
+ display: table;
+ width: 600px;
+ border-spacing: 10px;
+}
+ #encabezado {
+    display: table-header-group;
+    background-color: lightyellow;
+    border: 1px solid #000000;
+ }
+ #pie {
+    display: table-footer-group;
+    background-color: lightyellow;
+    border: 1px solid #000000;
+ }
+ .celda1, .celda2, .celda {
+    display: table-cell;
+    border: 1px solid #000000;
+ }
+ .celda1 {
+    width: 500px; 
+    background-color: lightgreen;
+ }
+ .celda2 {
+     width: 300px; 
+    background-color: lightblue;
+ }
+ .celda {
+ width: 300px;
+ empty-cells: show;
+}
+#leyenda {
+   display: table-caption;
+}
+
+ </style>
+</head>
+
+<body>
+<div id="tabla">
+ <div class="fila">
+ <div class="celda1">
+   <p>Prima luce...</p>
+ </div>
+ <div class="celda2">
+   <p>Lorem ipsum...</p>
+ </div>
+ <div class="celda">
+ </div>
+ </div>
+ <div id="encabezado">
+   <p>Encabezado. Inmensae subtilitatis...</p>
+ </div>
+ <div id="pie">
+   <p>Pie de página. Quis aute iure...</p>
+ </div>
+ <p id="leyenda">Quis aute iure reprehenderit in voluptate
+   velit esse.</p>
+</div>
+</body>
+</html>

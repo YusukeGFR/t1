@@ -1,0 +1,246 @@
+<?php
+
+include_once("../funciones.php");
+
+$arrayEmpresa = [
+    "Antonio" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Paco" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Ana" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Luisa" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Jose" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Esther" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Itziar" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Daniel" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Guillermo" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Maria" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Adrian" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Andrea" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "German" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Tamara" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Rosario" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Yolanda" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Aaron" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+    "Pedro" => [
+        "manzanas"=>rand(1,100),
+        "peras"=>rand(1,100),
+        "tomates"=>rand(1,100),
+        "patatas"=>rand(1,100),
+        "boniatos"=>rand(1,100),
+        "lechugas"=>rand(1,100),
+        "cerezas"=>rand(1,100),
+        "higos"=>rand(1,100),
+        "platanos"=>rand(1,100),
+        "granadas"=>rand(1,100),
+    ],
+];
+
+$cadenaEmpresa = array_a_cadenaurl($arrayEmpresa);
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <h1>Página principal</h1>
+    
+    <?= imprimir_menu($cadenaEmpresa) ?>
+    
+    
+    <img src="indexImage.jpg" alt="Imagen Inicial">
+
+</body>
+</html>
