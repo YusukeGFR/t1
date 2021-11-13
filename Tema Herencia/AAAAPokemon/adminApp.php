@@ -1,9 +1,21 @@
 <?php
+include_once("funciones.php");
+$url = explode("/",$_SERVER['HTTP_REFERER']);
+$last = $url[count($url)-1];
 
-if (isset($_POST[""]))
+if ($last === "checkAdmin.php") {
+
+    $correctLogin = true;
+
+} else {
+    header("location:paginaPrincipal.php");
+}
+    
+
 
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +25,6 @@ if (isset($_POST[""]))
     <title>Document</title>
 </head>
 <body>
-    
+    <?= imprimirMenu($correctLogin) ?>
 </body>
 </html>

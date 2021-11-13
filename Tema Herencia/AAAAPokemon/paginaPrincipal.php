@@ -1,16 +1,3 @@
-<?php
-
-    $fp = fopen("admin/admin.txt","r");
-    while ($admin = fscanf($fp,"%s\t%s")) {
-        list($nombre, $contra) = $admin;
-        echo $nombre." ".$contra;
-    }
-
-// Ey que pasa pollo
-// Nada pollo aqui estamos
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="admin.php" method="post">
+    <form action="checkAdmin.php" method="post">
         <input type="submit" value="Administrador" name="botonAdmin">
     </form>
     <form action="usuario.php" method="post">
