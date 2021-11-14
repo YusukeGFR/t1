@@ -4,12 +4,51 @@ if(isset($_POST["check"])) {
 
     $correctLogin = $_POST["check"];
     $error = "";
+    $mensaje = "";
 
     if (isset($_POST["new"])) {
 
+        $pokemons = [];
+        $errorDatos = false;
+        $nombre = trim($_POST["nombre"])??"";
+        $ataque = $_POST["ataque"];
+        $defensa = $_POST["defensa"];
+        $tipo1 = $_POST["tipo1"];
+        $tipo2 = $_POST["tipo2"];
+        $nivel = $_POST["level"];
 
+        $fp = fopen("admin/pokemons.txt","r");
+        while (! feof($fp)) {
+            $line = fgets($fp);
+            $datos = explode("-",$line);
+            $nombrePoke = array_splice($datos,0,1)[0];
+            array_push($pokemons,$nombrePoke);
+        }
+        fclose($fp);
 
+        // echo "<pre>";
+        // echo print_r($pokemons);
+        // echo "</pre>";
 
+        foreach($pokemons as $pokemonExistente) {
+            if ($nombre === $pokemonExistente) {
+                $errorDatos = true;
+            }
+        }
+
+        if ($nombre = "" || !soloLetras($nombre)) {
+            $errorDatos = true;
+        }
+
+        if ($errorDatos) {
+            $error = "Ha ocurrido un error, el pokemon no se añadirá.";
+        }else{
+            $fp = fopen("admin/pokemons.txt","a");
+            fwrite($fp,"{$nombre}-{$ataque}-{$defensa}-{$tipo1}-{$tipo2}-null-{$nivel}\n");
+            fclose($fp);
+            mkdir("pokemons/{$nombre}",755);
+            $mensaje = "Pokemon dado de alta correctamente.";
+        }
     }
 
 } else {
@@ -27,12 +66,12 @@ if(isset($_POST["check"])) {
 <body>
     <?= imprimirMenu($correctLogin) ?>
     <hr>
-    <form action="registrarUsuario.php" method="post">
+    <form action="altaPokemon.php" method="post">
         <p>Nombre del nuevo pokemon</p>
-        <input type="text" name="newPokemon" id="newPokemon">
+        <input type="text" name="nombre" id="nombre">
         <p>
-            Ataque <input type="number" name="ataque" id="newPass">
-            Defensa <input type="number" name="defensa" id="newPass">
+            Ataque <input type="number" name="ataque" id="ataque">
+            Defensa <input type="number" name="defensa" id="defensa">
         </p>
         <p>Seleccion de Tipos</p>
         <p>
@@ -46,7 +85,7 @@ if(isset($_POST["check"])) {
             ?>
             </select>
             Secundario:
-            <select name="tipo1" id="tipo1">
+            <select name="tipo2" id="tipo2">
             <?php 
                 array_push($tipos,"");
                 foreach ($tipos as $tipo) {
@@ -65,6 +104,7 @@ if(isset($_POST["check"])) {
         <input type="submit" value="Registar" name="new" id="new">
         <input type="hidden" name="check" id="check" value="<?= $correctLogin ?>">
         <p><?= $error ?></p>
+        <p><?= $mensaje ?></p>
     </form>
     <img src="pokemons/turtwig/turtwig.gif" alt="">
 </body>

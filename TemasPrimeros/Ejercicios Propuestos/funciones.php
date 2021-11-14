@@ -170,7 +170,7 @@ function stringToArray($cadena) {
     return $array;
 }
 function soloLetras($in){
-    if(preg_match('/^[a-zA-ZñÑ\s]+$/', $in)) return true;
+    if(preg_match('/^[a-zA-Z\s]+$/', $in)) return true;
     else return false;
 }
 

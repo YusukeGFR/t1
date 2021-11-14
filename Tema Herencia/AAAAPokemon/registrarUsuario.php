@@ -4,16 +4,18 @@ if(isset($_POST["check"])) {
 
     $correctLogin = $_POST["check"];
     $error = "";
+    $mensaje = "";
     if (isset($_POST["new"])) {
 
         $usuarios = [];
         $yaExiste = false;
-        $newUser = $_POST["newUser"];
-        $newPass = $_POST["newPass"];
+        $errorDatos = false;
+        $newUser = trim($_POST["newUser"])??"";
+        $newPass = trim($_POST["newPass"])??"";
 
         $fp = fopen("admin/users.txt","r");
-        while ($admin = fscanf($fp,"%s\t%s")) {
-            list($nombre, $contra) = $admin;
+        while ($user = fscanf($fp,"%s\t%s")) {
+            list($nombre, $contra) = $user;
             $usuarios[$nombre] = $contra;
         }
         fclose($fp);
@@ -24,13 +26,20 @@ if(isset($_POST["check"])) {
             }
         }
 
+        if($newUser === "" || !soloLetras($newUser)) {
+            $errorDatos = true;
+        }
+
         if($yaExiste) {
             $error = "El usuario ya existe";
+        } else if($errorDatos) {
+            $error = "Datos incompletos";
         } else {
             $fp = fopen("admin/users.txt","a");
             fwrite($fp,"{$newUser}\t{$newPass}\n");
             fclose($fp);
-            mkdir("users/{$newUser}");
+            mkdir("users/{$newUser}",755);
+            $mensaje = "Usuario registrado correctamente.";
         }
 
 
@@ -62,6 +71,7 @@ if(isset($_POST["check"])) {
         <input type="submit" value="Registar" name="new" id="new">
         <input type="hidden" name="check" id="check" value="<?= $correctLogin ?>">
         <p><?= $error ?></p>
+        <p><?= $mensaje ?></p>
     </form>
 </body>
 </html>

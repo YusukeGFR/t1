@@ -1,9 +1,10 @@
-1-turtwig-68-64-planta-null-grotle
-2-grotle-89-85-planta-null-torterra
-3-torterra-109-105-planta-tierra-null
-1-chimchar-58-44-fuego-null-monferno
-2-monferno-78-52-fuego-lucha-infernape
-3-infernape-104-71-fuego-lucha-null
-1-piplup-51-53-agua-null-prinplup
-2-prinplup-66-68-agua-null-empoleon
-3-empoleon-111-88-agua-acero-null
+turtwig-119-110-planta-null-grotle-1
+grotle-157-143-planta-null-torterra-2
+torterra-202-188-planta-tierra-null-3
+chimchar-113-86-fuego-null-monferno-1
+monferno-158-105-fuego-lucha-infernape-2
+infernape-222-151-fuego-lucha-null-3
+piplup-112-102-agua-null-prinplup-1
+prinplup-150-139-agua-null-empoleon-2
+empoleon-210-186-agua-acero-null-3
+El mejor-123-345-acero-null-null-1

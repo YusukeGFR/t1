@@ -23,3 +23,8 @@ function imprimirMenu($correctLogin) {
     </form>";
     return $menu;
 }
+
+function soloLetras($in){
+    if(preg_match('/^[a-zA-Z\s]+$/', $in)) return true;
+    else return false;
+}
