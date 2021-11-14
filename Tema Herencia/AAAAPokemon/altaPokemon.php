@@ -56,6 +56,8 @@ if(isset($_POST["check"])) {
             fwrite($fp,"{$nombre}-{$ataque}-{$defensa}-{$tipo1}-{$tipo2}-null-null-{$nivel}\n");
             fclose($fp);
             mkdir("pokemons/$nombre",755);
+            $fp = fopen("pokemons/{$nombre}/.gitkeep","w");
+            fclose($fp);
             $mensaje = "Pokemon dado de alta correctamente.";
         }
     }

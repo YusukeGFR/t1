@@ -39,11 +39,10 @@ if(isset($_POST["check"])) {
             fwrite($fp,"{$newUser}\t{$newPass}\n");
             fclose($fp);
             mkdir("users/{$newUser}",755);
+            $fp = fopen("users/{$newUser}/.gitkeep","w");
+            fclose($fp);
             $mensaje = "Usuario registrado correctamente.";
         }
-
-
-
     }
 
 } else {
