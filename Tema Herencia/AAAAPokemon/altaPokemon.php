@@ -10,7 +10,8 @@ if(isset($_POST["check"])) {
 
         $pokemons = [];
         $errorDatos = false;
-        $nombre = trim($_POST["nombre"])??"";
+        $nombre = $_POST["nombre"]??"";
+        $nombre = trim($nombre);
         $ataque = $_POST["ataque"];
         $defensa = $_POST["defensa"];
         $tipo1 = $_POST["tipo1"];
@@ -36,7 +37,15 @@ if(isset($_POST["check"])) {
             }
         }
 
-        if ($nombre = "" || !soloLetras($nombre)) {
+        if ($nombre === "" || !soloLetras($nombre)) {
+            $errorDatos = true;
+        }
+
+        if ($tipo1 === $tipo2) {
+            $errorDatos = true;
+        }
+
+        if (!ctype_digit($ataque) || !ctype_digit($defensa)) {
             $errorDatos = true;
         }
 
@@ -44,9 +53,9 @@ if(isset($_POST["check"])) {
             $error = "Ha ocurrido un error, el pokemon no se añadirá.";
         }else{
             $fp = fopen("admin/pokemons.txt","a");
-            fwrite($fp,"{$nombre}-{$ataque}-{$defensa}-{$tipo1}-{$tipo2}-null-{$nivel}\n");
+            fwrite($fp,"{$nombre}-{$ataque}-{$defensa}-{$tipo1}-{$tipo2}-null-null-{$nivel}\n");
             fclose($fp);
-            mkdir("pokemons/{$nombre}",755);
+            mkdir("pokemons/$nombre",755);
             $mensaje = "Pokemon dado de alta correctamente.";
         }
     }
@@ -61,7 +70,7 @@ if(isset($_POST["check"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Alta Pokemon</title>
 </head>
 <body>
     <?= imprimirMenu($correctLogin) ?>
@@ -100,7 +109,7 @@ if(isset($_POST["check"])) {
             </select>
         </p>
         <p>Nivel de la etapa evolutiva</p>
-        <p> 1<input type="radio" name="level" id="one" value="1"> 2<input type="radio" name="level" id="two" value="2"> 3<input type="radio" name="level" id="three" value="3"></p>
+        <p> 1<input type="radio" name="level" id="one" value="1" checked> 2<input type="radio" name="level" id="two" value="2"> 3<input type="radio" name="level" id="three" value="3"></p>
         <input type="submit" value="Registar" name="new" id="new">
         <input type="hidden" name="check" id="check" value="<?= $correctLogin ?>">
         <p><?= $error ?></p>

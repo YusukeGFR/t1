@@ -1,10 +1,15 @@
-turtwig-119-110-planta-null-grotle-1
-grotle-157-143-planta-null-torterra-2
-torterra-202-188-planta-tierra-null-3
-chimchar-113-86-fuego-null-monferno-1
-monferno-158-105-fuego-lucha-infernape-2
-infernape-222-151-fuego-lucha-null-3
-piplup-112-102-agua-null-prinplup-1
-prinplup-150-139-agua-null-empoleon-2
-empoleon-210-186-agua-acero-null-3
-El mejor-123-345-acero-null-null-1
+turtwig-119-110-planta-null-null-grotle-1
+grotle-157-143-planta-null-turtwig-torterra-2
+torterra-202-188-planta-tierra-grotle-null-3
+chimchar-113-86-fuego-null-null-monferno-1
+monferno-158-105-fuego-lucha-chimchar-infernape-2
+infernape-222-151-fuego-lucha-monferno-null-3
+piplup-112-102-agua-null-null-prinplup-1
+prinplup-150-139-agua-null-piplup-empoleon-2
+empoleon-210-186-agua-acero-prinplup-null-3
+El mejor-123-345-acero-null-null-El mas mejor-1
+tyu-23-45-dragon-hielo-null-tyura-1
+tyura-29-67-dragon-hielo-tyu-tyurane-2
+tyurane-70-95-draon-hielo-tyura-null-3
+El mas mejor-123-456-fantasma-veneno-El mejor-El super mejor-2
+El super mejor-34234-23424-bicho-bicho-El mas mejor-null-3
