@@ -1,0 +1,9 @@
+1-turtwig-68-64-planta-null-grotle
+2-grotle-89-85-planta-null-torterra
+3-torterra-109-105-planta-tierra-null
+1-chimchar-58-44-fuego-null-monferno
+2-monferno-78-52-fuego-lucha-infernape
+3-infernape-104-71-fuego-lucha-null
+1-piplup-51-53-agua-null-prinplup
+2-prinplup-66-68-agua-null-empoleon
+3-empoleon-111-88-agua-acero-null

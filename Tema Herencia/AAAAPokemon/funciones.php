@@ -3,23 +3,23 @@
 function imprimirMenu($correctLogin) {
     $menu = "
     <form action='registrarUsuario.php' method='post'>
-        <input type='submit' value='Registrar Usuario' id='button1'>
-        <input type='hidden' name='$correctLogin'>
+        <input type='submit' value='Registrar Usuario' name='button1'>
+        <input type='hidden' name='check' value='$correctLogin'>
     </form>
 
-    <form action='registrarUsuario.php' method='post'>
-        <input type='submit' value='Alta Digimon' id='button1'>
-        <input type='hidden' name='$correctLogin'>
+    <form action='altaPokemon.php' method='post'>
+        <input type='submit' value='Alta Pokemon' name='button2'>
+        <input type='hidden' name='check' value='$correctLogin'>
     </form>
 
-    <form action='registrarUsuario.php' method='post'>
-        <input type='submit' value='Definir Evolución' id='button1'>
-        <input type='hidden' name='$correctLogin'>
+    <form action='definirEvolucion.php' method='post'>
+        <input type='submit' value='Definir Evolución' name='button3'>
+        <input type='hidden' name='check' value='$correctLogin'>
     </form>
 
-    <form action='registrarUsuario.php' method='post'>
-        <input type='submit' value='Ver Pokemons' id='button1'>
-        <input type='hidden' name='$correctLogin'>
+    <form action='verPokemons.php' method='post'>
+        <input type='submit' value='Ver Pokemons' name='button4'>
+        <input type='hidden' name='check' value='$correctLogin'>
     </form>";
     return $menu;
 }
