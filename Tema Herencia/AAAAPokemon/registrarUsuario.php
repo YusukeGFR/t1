@@ -1,6 +1,9 @@
 <?php
 include_once("funciones.php");
+include_once("usuario.php");
 if(isset($_POST["check"])) {
+
+    // $usuario1 = new usuario("nombre","123");
 
     $correctLogin = $_POST["check"];
     $error = "";
@@ -14,14 +17,21 @@ if(isset($_POST["check"])) {
         $newPass = trim($_POST["newPass"])??"";
 
         $fp = fopen("admin/users.txt","r");
+        $i = 0;
         while ($user = fscanf($fp,"%s\t%s")) {
             list($nombre, $contra) = $user;
-            $usuarios[$nombre] = $contra;
+            $usuario = new Usuario($nombre,$contra);
+            $usuarios[$i] = $usuario;
+            $i++;
         }
         fclose($fp);
 
-        foreach($usuarios as $currentUsuario => $currentPass) {
-            if ($currentUsuario === $newUser) {
+        echo "<pre>";
+        print_r($usuarios);
+        echo "</pre>";
+        // echo $usuarios[0]->getNombre();
+        foreach($usuarios as $indice => $usuarioObj) {
+            if ($usuarioObj->getNombre() === $newUser) {
                 $yaExiste = true;
             }
         }

@@ -9,17 +9,17 @@ if (isset($_POST["botonAdmin"])) {
     
     $requestName = $_POST["requestName"];
     $requestPass = $_POST["requestPass"];
-    $adminName;
-    $adminPass;
+    $auth = false;
 
     $fp = fopen("admin/admin.txt","r");
     while ($admin = fscanf($fp,"%s\t%s")) {
         list($nombre, $contra) = $admin;
-        $adminName = $nombre;
-        $adminPass = $contra;
+        if ($nombre === $requestName && $contra === $requestPass) {
+            $auth = true;
+        }
     }
 
-    if ($adminName === $requestName && $adminPass === $requestPass) {
+    if ($auth) {
         header("location:adminApp.php");
     } else {
         $errorMessage = "Datos erróneos";

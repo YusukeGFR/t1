@@ -22,8 +22,7 @@ if(isset($_POST["check"])) {
         while (! feof($fp)) {
             $line = fgets($fp);
             $datos = explode("-",$line);
-            $nombrePoke = array_splice($datos,0,1)[0];
-            array_push($pokemons,$nombrePoke);
+            // array_push($pokemons,);
         }
         fclose($fp);
 
