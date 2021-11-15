@@ -1,11 +1,30 @@
 <?php
 include_once("funciones.php");
+include_once("pokemon.php");
 $url = explode("/",$_SERVER['HTTP_REFERER']);
 $last = $url[count($url)-1];
 
 if ($last === "checkAdmin.php") {
 
     $correctLogin = true;
+    $pokemons = [];
+
+    $fp = fopen("admin/pokemons.txt","r");
+        while (! feof($fp)) {
+            $line = fgets($fp);
+            $datos = explode("-",$line);
+            if (count($datos) > 1) {
+                array_push($pokemons,new pokemon($datos[0],$datos[1],$datos[2],$datos[3],$datos[4],$datos[5],$datos[6],$datos[7]));
+            }
+        }
+    fclose($fp);
+
+    $fp = fopen("admin/pokemonsSerialized.txt","w");
+    fwrite($fp,array_a_cadenaurl($pokemons));
+    fclose($fp);
+
+    $pokemonsSerealized = file_get_contents("admin/pokemonsSerialized.txt");
+    $recoveredPokes = cadenaurl_a_array($pokemonsSerealized);
 
 } else {
     header("location:paginaPrincipal.php");

@@ -1,5 +1,6 @@
 <?php
 include_once("funciones.php");
+include_once("pokemon.php");
 if(isset($_POST["check"])) {
 
     $correctLogin = $_POST["check"];
@@ -12,6 +13,7 @@ if(isset($_POST["check"])) {
         $secondName = explode("-",$_POST["second"])[0];
         $secondLevel = explode("-",$_POST["second"])[1];
 
+        $pokemons = cadenaurl_a_array( file_get_contents("admin/pokemonsSerialized.txt") );
         $datos = [];
         $error = false;
         $content = file_get_contents("admin/pokemons.txt");
@@ -25,9 +27,7 @@ if(isset($_POST["check"])) {
         }
         for($i = 0; $i < count($lines); $i++) {
             $datos = explode("-",$lines[$i]);
-            // echo "<pre>";
-            // print_r($datos);
-            // echo "</pre>";
+            
             if ($datos[0] === $firstName) {
                 $datos[6] = $secondName;
             }
@@ -36,11 +36,29 @@ if(isset($_POST["check"])) {
             }
             $lines[$i] = implode("-",$datos);
         }
+
+        foreach ($pokemons as $indice => $pokeObj) {
+            if ($pokeObj->getNombre() === $firstName ) {
+                $pokeObj->setNextEvo($secondName);
+            }
+
+            if ($pokeObj->getNombre() === $secondName ) {
+                $pokeObj->setPreEvo($firstName);
+            }
+        }
+
+
+
+
+
         if ($error) {
             $mensajeError = "Error, vuelva a intentarlo.";
         } else {
             $aImprimir = implode("\n",$lines);
             file_put_contents("admin/pokemons.txt",$aImprimir);
+            $fp = fopen("admin/pokemonsSerialized.txt","w");
+            fwrite($fp,array_a_cadenaurl($pokemons));
+            fclose($fp);
         }
         // echo "<pre>";
         // print_r($lines);

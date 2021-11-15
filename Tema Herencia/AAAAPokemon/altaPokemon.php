@@ -1,5 +1,6 @@
 <?php
 include_once("funciones.php");
+include_once("pokemon.php");
 if(isset($_POST["check"])) {
 
     $correctLogin = $_POST["check"];
@@ -8,7 +9,7 @@ if(isset($_POST["check"])) {
 
     if (isset($_POST["new"])) {
 
-        $pokemons = [];
+        $pokemons = cadenaurl_a_array( file_get_contents("admin/pokemonsSerialized.txt") );
         $errorDatos = false;
         $nombre = $_POST["nombre"]??"";
         $nombre = trim($nombre);
@@ -18,20 +19,12 @@ if(isset($_POST["check"])) {
         $tipo2 = $_POST["tipo2"];
         $nivel = $_POST["level"];
 
-        $fp = fopen("admin/pokemons.txt","r");
-        while (! feof($fp)) {
-            $line = fgets($fp);
-            $datos = explode("-",$line);
-            // array_push($pokemons,);
-        }
-        fclose($fp);
-
         // echo "<pre>";
         // echo print_r($pokemons);
         // echo "</pre>";
 
-        foreach($pokemons as $pokemonExistente) {
-            if ($nombre === $pokemonExistente) {
+        foreach($pokemons as $indice => $pokeObj) {
+            if ($pokeObj->getNombre() === $nombre) {
                 $errorDatos = true;
             }
         }
@@ -58,6 +51,10 @@ if(isset($_POST["check"])) {
             $fp = fopen("pokemons/{$nombre}/.gitkeep","w");
             fclose($fp);
             $mensaje = "Pokemon dado de alta correctamente.";
+            array_push($pokemons,new pokemon($nombre,$ataque,$defensa,$tipo1,$tipo2,"null","null",$nivel));
+            $fp = fopen("admin/pokemonsSerialized.txt","w");
+            fwrite($fp,array_a_cadenaurl($pokemons));
+            fclose($fp);
         }
     }
 

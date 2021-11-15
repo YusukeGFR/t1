@@ -26,10 +26,9 @@ if(isset($_POST["check"])) {
         }
         fclose($fp);
 
-        echo "<pre>";
-        print_r($usuarios);
-        echo "</pre>";
-        // echo $usuarios[0]->getNombre();
+        // echo "<pre>";
+        // print_r($usuarios);
+        // echo "</pre>";
         foreach($usuarios as $indice => $usuarioObj) {
             if ($usuarioObj->getNombre() === $newUser) {
                 $yaExiste = true;
