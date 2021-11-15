@@ -13,7 +13,9 @@ if(isset($_POST["check"])) {
         $secondName = explode("-",$_POST["second"])[0];
         $secondLevel = explode("-",$_POST["second"])[1];
 
-        $pokemons = cadenaurl_a_array( file_get_contents("admin/pokemonsSerialized.txt") );
+        $fp = fopen("admin/pokemonsSerialized.txt","r");
+        $pokemons = cadenaurl_a_array( fgets($fp) );
+        fclose($fp);
         $datos = [];
         $error = false;
         $content = file_get_contents("admin/pokemons.txt");
