@@ -1,8 +1,15 @@
 <?php
 class Usuario {
 
+    // Mis POkemons
+    // Equipo
+    // Partidas ganadas
+    // Partidas perdidas
+    // Evoluciones disponibles
+
     private $nombre;
     private $pass;
+    private $equipo;
 
     public function __construct($nombre,$pass) {
         $this->nombre= $nombre;
