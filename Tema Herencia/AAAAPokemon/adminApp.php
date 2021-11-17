@@ -19,12 +19,7 @@ if ($last === "checkAdmin.php") {
         }
     fclose($fp);
 
-    $fp = fopen("admin/pokemonsSerialized.txt","w");
-    fwrite($fp,array_a_cadenaurl($pokemons));
-    fclose($fp);
-
-    $pokemonsSerealized = file_get_contents("admin/pokemonsSerialized.txt");
-    $recoveredPokes = cadenaurl_a_array($pokemonsSerealized);
+    file_put_contents("admin/pokemonsSerialized.txt",serialize($pokemons));
 
 } else {
     header("location:paginaPrincipal.php");
