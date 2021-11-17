@@ -65,7 +65,6 @@ if(isset($_POST["check"])) {
             for($i=0; $i < 3; $i++) {
                 do {
                     $numRand = rand(0,count($pokemons)-1);
-                    echo $numRand." ";
                 } while(in_array($numRand,$numerosRand));
                 array_push($numerosRand,$numRand);
             }

@@ -113,6 +113,5 @@ if(isset($_POST["check"])) {
         <p><?= $error ?></p>
         <p><?= $mensaje ?></p>
     </form>
-    <img src="pokemons/turtwig/turtwig.gif" alt="">
 </body>
 </html>

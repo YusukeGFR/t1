@@ -47,10 +47,6 @@ if(isset($_POST["check"])) {
             }
         }
 
-
-
-
-
         if ($error) {
             $mensajeError = "Error, vuelva a intentarlo.";
         } else {
