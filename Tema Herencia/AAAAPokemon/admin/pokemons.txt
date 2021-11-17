@@ -17,3 +17,4 @@ eddd-123-123-acero-null-null-null-2
 qwer-123-12-acero-null-null-null-2
 Lucario-123-107-acero-lucha-null-Mega Lucario-2
 Mega Lucario-145-115-acero-lucha-Lucario-null-3
+agumon-123-123-fuego-planta-null-null-3

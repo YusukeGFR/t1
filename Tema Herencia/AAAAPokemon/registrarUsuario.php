@@ -11,23 +11,28 @@ if(isset($_POST["check"])) {
     $mensaje = "";
     if (isset($_POST["new"])) {
 
-        $pokemons = unserialize(file_get_contents("admin/pokemonsSerialized.txt"));
-        $usuarios = [];
+        $pokemons = cadenaurl_a_array(file_get_contents("admin/pokemonsSerialized.txt"));
         $yaExiste = false;
         $errorDatos = false;
         $newUser = trim($_POST["newUser"])??"";
         $newPass = trim($_POST["newPass"])??"";
 
-        $fp = fopen("admin/users.txt","r");
-        $i = 0;
-        while ($user = fscanf($fp,"%s\t%s")) {
-            list($nombre, $contra) = $user;
-            $usuario = new Usuario($nombre,$contra);
-            $usuarios[$i] = $usuario;
-            $i++;
+        // Comprobar si el fichero existe, si es así se deserializa la información, sinó se lee el fichero
+        $usuarios = [];
+        if (file_exists("admin/usuariosSerialized.txt")) {
+            $usuarios = cadenaurl_a_array(file_get_contents("admin/usuariosSerialized.txt"));
+        } else {
+            $fp = fopen("admin/users.txt","r");
+            $i = 0;
+            while ($user = fscanf($fp,"%s\t%s")) {
+                list($nombre, $contra) = $user;
+                $usuario = new Usuario($nombre,$contra);
+                $usuarios[$i] = $usuario;
+                $i++;
+            }
+            fclose($fp);
         }
-        fclose($fp);
-
+        
         // Coge la informacion del fichero serializado de usuarios, de lo contrario los usuarios 
         //que ya existan perderán los pokemon asignados
 
@@ -71,23 +76,13 @@ if(isset($_POST["check"])) {
                     if($indice == $rand) {
                         array_push($equipoPrueba,$pokeObj);
                         $usuarioNuevo->setMiEquipo($equipoPrueba);
+                        $usuarioNuevo->setMisPokemons($equipoPrueba);
                     }
                 }
             }
 
-
-            echo "<pre>";
-            print_r($usuarioNuevo->getMiEquipo());
-            echo "</pre>";
-
             array_push($usuarios,$usuarioNuevo);
-            file_put_contents("admin/usuariosSerialized.txt",serialize($usuarios));
-
-            $usuariosRecogidos = unserialize(file_get_contents("admin/usuariosSerialized.txt"));
-            echo "<pre>";
-            print_r($usuariosRecogidos);
-            echo "</pre>";
-
+            file_put_contents("admin/usuariosSerialized.txt",array_a_cadenaurl($usuarios));
             $mensaje = "Usuario registrado correctamente.";
         }
     }

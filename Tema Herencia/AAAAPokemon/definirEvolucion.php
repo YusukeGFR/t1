@@ -8,14 +8,12 @@ if(isset($_POST["check"])) {
 
     if(isset($_POST["define"])) {
         
+        $pokemons = cadenaurl_a_array( file_get_contents("admin/pokemonsSerialized.txt") );
         $firstName = explode("-",$_POST["first"])[0];
         $firstLevel = explode("-",$_POST["first"])[1];
         $secondName = explode("-",$_POST["second"])[0];
         $secondLevel = explode("-",$_POST["second"])[1];
 
-        $fp = fopen("admin/pokemonsSerialized.txt","r");
-        $pokemons = cadenaurl_a_array( fgets($fp) );
-        fclose($fp);
         $datos = [];
         $error = false;
         $content = file_get_contents("admin/pokemons.txt");
