@@ -10,7 +10,7 @@
     <form action="checkAdmin.php" method="post">
         <input type="submit" value="Administrador" name="botonAdmin">
     </form>
-    <form action="usuario.php" method="post">
+    <form action="checkUser.php" method="post">
         <input type="submit" value="Usuario" name="botonUsuario">
     </form>
 </body>

@@ -44,7 +44,7 @@ if (isset($_POST["botonAdmin"])) {
     <form action="checkAdmin.php" method="post">
         <p><?= $loginMessage ?></p>
         <p>Nombre</p>
-        <input type="text" name="requestName" id="requestnName">
+        <input type="text" name="requestName" id="requestName">
         <p>Contraseña</p>
         <input type="password" name="requestPass" id="requestPass">
         <input type="submit" value="Iniciar Sesión" name="check" id="check">
