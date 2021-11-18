@@ -7,3 +7,5 @@ infernape-222-151-fuego-lucha-monferno-null-3
 piplup-112-102-agua-null-null-prinplup-1
 prinplup-150-139-agua-null-piplup-empoleon-2
 empoleon-210-186-agua-acero-prinplup-null-3
+buizel-123-123-agua-null-null-null-1
+floatzel-123-123-agua-null-null-null-2

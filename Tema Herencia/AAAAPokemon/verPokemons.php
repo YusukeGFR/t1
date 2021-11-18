@@ -27,12 +27,16 @@ if(isset($_POST["check"])) {
     <hr>
 <table border="1">
     <tr>
+        <td>Nº</td>
         <td>Nombre</td>
+        <td>Ataque</td>
+        <td>Defensa</td>
+        <td>Tipo</td>
+        <td>Nivel</td>
         <td>Imagen</td>
         <td>Imagen de Victoria</td>
         <td>Imagen de Derrota</td>
-        <td>Datos</td>
-        <td>Modificar</td>
+        <td>Modificar Imágenes</td>
     </tr>
     <?php
         $linea = "";
@@ -44,11 +48,26 @@ if(isset($_POST["check"])) {
 
             $linea = "<tr>";
 
-            $linea .= "<td width='100px' height='100px'> 
+            $linea .= "<td> {$indice}</td>";
+
+            $linea .= "<td > 
                         ".ucfirst($nombrePoke)."
                        </td>";
 
-            $linea .= "<td width='100px' height='100px'>";
+            $linea .= "
+                <td> <p>{$pokeObj->getAtaque()}</p> </td>
+                <td> <p>{$pokeObj->getDefensa()}</p> </td>
+                <td> <p><img src='images/{$pokeObj->getTipo1()}.png'>";
+            
+            if ($pokeObj->getTipo2() !== "null") {
+                $linea .= "<img src='images/{$pokeObj->getTipo2()}.png'></p></td>";
+            } else {
+                $linea .= "</p></td>";
+            }
+
+            $linea .= " <td> <p> {$pokeObj->getNivel()}</p> </td>";
+
+            $linea .= "<td >";
             foreach($supported_file as $indice2 => $ext) {
                 if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}.{$ext}")) {
                     $dibujado = true;
@@ -62,7 +81,7 @@ if(isset($_POST["check"])) {
 
 
             $linea .= " </td>
-                        <td width='100px' height='100px'>";
+                        <td >";
             $dibujado = false;
             foreach($supported_file as $indice2 => $ext) {
                 
@@ -78,7 +97,7 @@ if(isset($_POST["check"])) {
 
 
             $linea .= " </td>
-                        <td width='100px' height='100px'>";
+                        <td>";
             $dibujado = false;
             foreach($supported_file as $indice2 => $ext) {
                 if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}D.{$ext}")) {
@@ -91,24 +110,20 @@ if(isset($_POST["check"])) {
             }
 
 
-            $linea .= " </td>
-                        <td>";
+            $linea .= " </td>";
             
-            $linea .= " <p>Ataque: {$pokeObj->getAtaque()}</p>
-                        <p>Defensa: {$pokeObj->getDefensa()}</p>
-                        <p>Tipo: <img src='images/{$pokeObj->getTipo1()}.png'>";
-                        
-                        if ($pokeObj->getTipo2() !== "null") {
-                            $linea .= "<img src='images/{$pokeObj->getTipo2()}.png'></p>";
-                        } else {
-                            $linea .= "</p>";
-                        }
-            $linea .= " <p>Nivel: {$pokeObj->getNivel()}</p>";
             
+            
+            $linea .= "<td> 
+                <form action='actualizarImagen.php' method='post'>
+                    <input type='submit' value='Modificar / Añadir' name='update' id='update'>
+                    <input type='hidden' value='{$nombrePoke}' name='name'>
+                    <input type='hidden' value='{$correctLogin}' name='check'>
+                </form>
+            </td>";
 
 
-            $linea .= "</td>
-                        </tr>";
+            $linea .= "</tr>";
             echo $linea;
         }
 
