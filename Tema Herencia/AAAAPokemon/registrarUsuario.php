@@ -32,12 +32,9 @@ if(isset($_POST["check"])) {
             }
             fclose($fp);
         }
-        
-        // Coge la informacion del fichero serializado de usuarios, de lo contrario los usuarios 
-        //que ya existan perderán los pokemon asignados
 
         foreach($usuarios as $indice => $usuarioObj) {
-            if ($usuarioObj->getNombre() === $newUser) {
+            if ( strtolower($usuarioObj->getNombre()) === strtolower($newUser)) {
                 $yaExiste = true;
             }
         }
@@ -55,8 +52,6 @@ if(isset($_POST["check"])) {
             fwrite($fp,"{$newUser}\t{$newPass}\n");
             fclose($fp);
             mkdir("users/{$newUser}",755);
-            $fp = fopen("users/{$newUser}/.gitkeep","w");
-            fclose($fp);
 
 
             $usuarioNuevo = new Usuario($newUser,$newPass);
@@ -65,20 +60,26 @@ if(isset($_POST["check"])) {
             for($i=0; $i < 3; $i++) {
                 do {
                     $numRand = rand(0,count($pokemons)-1);
-                } while(in_array($numRand,$numerosRand));
+                } while(in_array($numRand,$numerosRand) || $pokemons[$numRand]->getNivel() != 1);
                 array_push($numerosRand,$numRand);
             }
 
             $equipoPrueba = [];
+            $userPokemons = fopen("users/{$newUser}/pokemons_usuario.txt","a+");
+            $userTeam = fopen("users/{$newUser}/equipo_usuario.txt","a+");
             foreach($numerosRand as $indice => $rand) {
                 foreach($pokemons as $indice => $pokeObj) {
                     if($indice == $rand) {
                         array_push($equipoPrueba,$pokeObj);
                         $usuarioNuevo->setMiEquipo($equipoPrueba);
                         $usuarioNuevo->setMisPokemons($equipoPrueba);
+                        fwrite($userPokemons, $pokeObj->getNombre()."\n" );
+                        fwrite($userTeam, $pokeObj->getNombre()."\n" );
                     }
                 }
             }
+            fclose($userPokemons);
+            fclose($userTeam);
 
             array_push($usuarios,$usuarioNuevo);
             file_put_contents("admin/usuariosSerialized.txt",array_a_cadenaurl($usuarios));

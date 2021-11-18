@@ -50,7 +50,7 @@ function imprimirTablaPokemons($correctLogin,$pokemons) {
 
             $linea .= "<tr>";
 
-            $linea .= "<td> {$indice}</td>";
+            $linea .= "<td>".($indice+1)."</td>";
 
             $linea .= "<td > 
                         ".ucfirst($nombrePoke)."
