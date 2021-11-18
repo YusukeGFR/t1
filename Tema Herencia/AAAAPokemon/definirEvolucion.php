@@ -91,7 +91,7 @@ if(isset($_POST["check"])) {
                         $nombrePoke = $datos[0];
                         $nextEvo = $datos[6];
                         $nivel = $datos[7];
-                        if ($nivel != "3" && $nombrePoke != "" && $nextEvo === "null") {
+                        if ($nivel != 3 && $nombrePoke != "" && $nextEvo === "null") {
                             $cadena .= "<option value='{$nombrePoke}-{$nivel}'>".ucfirst($nombrePoke)." - {$nivel}</option>";
                             $hayDatos1 = true;
                         }
@@ -108,7 +108,7 @@ if(isset($_POST["check"])) {
                         $nombrePoke = $datos[0];
                         $preEvo = $datos[5];
                         $nivel = $datos[7];
-                        if ($nivel != "1" && $nombrePoke != "" && $preEvo === "null") {
+                        if ($nivel != 1 && $nombrePoke != "" && $preEvo === "null") {
                             $cadena .= "<option value='{$nombrePoke}-{$nivel}'>".ucfirst($nombrePoke)." - {$nivel}</option>";
                             $hayDatos2 = true;
                         }
