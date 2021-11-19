@@ -1,6 +1,7 @@
 <?php
 include_once("funciones.php");
 include_once("pokemon.php");
+include_once("usuario.php");
 if(isset($_POST["check"])) {
 
     $correctLogin = $_POST["check"];
@@ -8,7 +9,8 @@ if(isset($_POST["check"])) {
 
     if(isset($_POST["define"])) {
         
-        $pokemons = cadenaurl_a_array( file_get_contents("admin/pokemonsSerialized.txt") );
+        $usuarios = cadenaurl_a_array( file_get_contents("admin/pokemonsSerialized.txt") );
+        $pokemons = cadenaurl_a_array( file_get_contents("admin/usuariosSerialized.txt") );
         $firstName = explode("-",$_POST["first"])[0];
         $firstLevel = explode("-",$_POST["first"])[1];
         $secondName = explode("-",$_POST["second"])[0];
@@ -46,6 +48,21 @@ if(isset($_POST["check"])) {
                 $pokeObj->setPreEvo($firstName);
             }
         }
+
+        foreach ($usuarios as $usuario) {
+
+            $equipo = $usuario->getMiEquipo();
+            $pokemons = $usuario->getMisPokemons();
+
+            if ($pokeObj->getNombre() === $firstName ) {
+                $pokeObj->setNextEvo($secondName);
+            }
+
+            if ($pokeObj->getNombre() === $secondName ) {
+                $pokeObj->setPreEvo($firstName);
+            }
+        }
+
 
         if ($error) {
             $mensajeError = "Error, vuelva a intentarlo.";

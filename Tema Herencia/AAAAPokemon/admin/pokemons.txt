@@ -5,7 +5,7 @@ chimchar-113-86-fuego-null-null-monferno-1
 monferno-158-105-fuego-lucha-chimchar-infernape-2
 infernape-222-151-fuego-lucha-monferno-null-3
 piplup-112-102-agua-null-null-prinplup-1
-prinplup-150-139-agua-null-piplup-empoleon-2
+prinplup-150-139-agua-null-piplup-paco-2
 empoleon-210-186-agua-acero-prinplup-null-3
 buizel-132-67-agua-null-null-floatzel-1
 floatzel-221-114-agua-null-buizel-null-2
@@ -52,3 +52,4 @@ skuntank-184-132-veneno-siniestro-stunky-null-2
 starly-101-58-normal-volador-null-staravia-1
 staravia-142-94-normal-volador-starly-staraptor-2
 staraptor-234-140-normal-volador-staravia-null-3
+paco-123-123-acero-null-null-null-3
