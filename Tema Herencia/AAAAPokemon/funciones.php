@@ -27,31 +27,34 @@ function imprimirMenu($correctLogin) {
     return $menu;
 }
 
-function menuUsuario($user) {
+function menuUsuario() {
     $menu = "
     <form action='ver_mis_pokemons.php' method='post'>
         <input type='submit' value='Ver mis Pokémons' name='button1'>
-        <input type='hidden' name='user' value='$user'>
     </form>
 
     <form action='organizar_equipo.php' method='post'>
         <input type='submit' value='Organizar mi Equipo' name='button2'>
-        <input type='hidden' name='user' value='$user'>
     </form>
 
     <form action='jugar_partida.php' method='post'>
         <input type='submit' value='Jugar Partida' name='button3'>
-        <input type='hidden' name='user' value='$user'>
     </form>
 
     <form action='pokeevolucionar.php' method='post'>
         <input type='submit' value='Evolucionar un Pokémon' name='button4'>
-        <input type='hidden' name='user' value='$user'>
     </form>
     <form action='paginaPrincipal.php' method='post'>
         <input type='submit' value='Desconectar' name='button5'>
     </form>";
     return $menu;
+}
+
+function comprobacion() {
+    session_start();
+    if (!isset($_SESSION["usuario"])) {
+        header("location:paginaPrincipal.php");
+    }
 }
 
 function imprimirTablaPokemons($correctLogin,$pokemons) {

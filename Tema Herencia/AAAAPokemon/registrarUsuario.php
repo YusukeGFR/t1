@@ -88,14 +88,13 @@ if(isset($_POST["check"])) {
             $fp = fopen("users/{$newUser}/partidas.txt","a+");
             fwrite($fp,"0 0 0");
 
+            // echo "<pre>";
+            // print_r($usuarioNuevo);
+            // echo "</pre>";
+
             array_push($usuarios,$usuarioNuevo);
             file_put_contents("admin/usuariosSerialized.txt",array_a_cadenaurl($usuarios));
             $mensaje = "Usuario registrado correctamente.";
-
-            $usus = cadenaurl_a_array(file_get_contents("admin/usuariosSerialized.txt"));
-            echo "<pre>";
-            print_r($usus);
-            echo "</pre>";
             
         }
     }

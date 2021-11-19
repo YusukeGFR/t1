@@ -23,11 +23,13 @@ if (isset($_POST["checkUser"])) {
         $errorMessage = "Usuario o contraseña incorrectos";
     } else {
         $usuarios = cadenaurl_a_array(file_get_contents("admin/usuariosSerialized.txt"));
-
         foreach($usuarios as $indice => $usuario) {
             if($usuario->getNombre() == $user) {
+                echo "<pre>";
+                print_r($usuario);
+                echo "</pre>";
                 session_start();
-                $_SESSION["usuario"] = $usuario;
+                $_SESSION["usuario"] = serialize($usuario);
                 header("location:inicio_usuario.php");
             }
         }

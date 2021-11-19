@@ -5,8 +5,8 @@ chimchar-113-86-fuego-null-null-monferno-1
 monferno-158-105-fuego-lucha-chimchar-infernape-2
 infernape-222-151-fuego-lucha-monferno-null-3
 piplup-112-102-agua-null-null-prinplup-1
-prinplup-150-139-agua-null-piplup-paco-2
-empoleon-210-186-agua-acero-prinplup-null-3
+prinplup-150-139-agua-null-piplup-empoleon-2
+empoleon-210-186-agua-acero-glameow-null-3
 buizel-132-67-agua-null-null-floatzel-1
 floatzel-221-114-agua-null-buizel-null-2
 aipom-136-112-normal-null-null-ambipom-1
@@ -19,7 +19,7 @@ bronzor-43-154-acero-psiquico-null-bronzong-1
 bronzong-161-213-acero-psiquico-bronzor-null-2
 budew-91-109-planta-veneno-null-roselia-1
 roselia-186-131-planta-veneno-budew-roserade-2
-roserade-243-185-planta-veneno-roselia-null-3
+roserade-243-185-planta-veneno-glameow-null-3
 buneary-130-105-normal-null-null-lopunny-1
 lopunny-156-194-normal-null-buneary-null-2
 burmy-53-83-bicho-null-null-mothim-1
@@ -52,4 +52,3 @@ skuntank-184-132-veneno-siniestro-stunky-null-2
 starly-101-58-normal-volador-null-staravia-1
 staravia-142-94-normal-volador-starly-staraptor-2
 staraptor-234-140-normal-volador-staravia-null-3
-paco-123-123-acero-null-null-null-3

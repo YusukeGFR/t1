@@ -1,15 +1,12 @@
 <?php
 include_once("funciones.php");
 include_once("usuario.php");
-session_start();
-if (!isset($_SESSION["usuario"])) {
-    header("location:paginaPrincipal.php");
-}
-    $user = $_SESSION["usuario"];
-
-    echo "<pre>";
-    print_r($user);
-    echo "</pre>";
+include_once("pokemon.php");
+comprobacion();
+    $menu = menuUsuario();
+    // echo "<pre>";
+    // print_r($user);
+    // echo "</pre>";
 
 
 ?>

@@ -9,8 +9,8 @@ if(isset($_POST["check"])) {
 
     if(isset($_POST["define"])) {
         
-        $usuarios = cadenaurl_a_array( file_get_contents("admin/pokemonsSerialized.txt") );
-        $pokemons = cadenaurl_a_array( file_get_contents("admin/usuariosSerialized.txt") );
+        $pokemons = cadenaurl_a_array( file_get_contents("admin/pokemonsSerialized.txt") );
+        $usuarios = cadenaurl_a_array( file_get_contents("admin/usuariosSerialized.txt") );
         $firstName = explode("-",$_POST["first"])[0];
         $firstLevel = explode("-",$_POST["first"])[1];
         $secondName = explode("-",$_POST["second"])[0];
@@ -24,7 +24,7 @@ if(isset($_POST["check"])) {
         // echo "<pre>";
         // print_r($lines);
         // echo "</pre>";
-        if ($firstLevel >= $secondLevel) {
+        if ($firstLevel >= $secondLevel || $firstLevel+1 != $secondLevel) {
             $error = true;
         }
         for($i = 0; $i < count($lines); $i++) {
@@ -51,16 +51,26 @@ if(isset($_POST["check"])) {
 
         foreach ($usuarios as $usuario) {
 
-            $equipo = $usuario->getMiEquipo();
-            $pokemons = $usuario->getMisPokemons();
+            $miEquipo = $usuario->getMiEquipo();
+            $misPokemons = $usuario->getMisPokemons();
 
-            if ($pokeObj->getNombre() === $firstName ) {
-                $pokeObj->setNextEvo($secondName);
+            foreach ($miEquipo as $pokemon) {
+                if ($pokemon->getNombre() === $firstName ) {
+                    $pokemon->setNextEvo($secondName);
+                }
+                if ($pokemon->getNombre() === $secondName ) {
+                    $pokemon->setPreEvo($firstName);
+                }
+            }
+            foreach ($misPokemons as $pokemon) {
+                if ($pokemon->getNombre() === $firstName ) {
+                    $pokemon->setNextEvo($secondName);
+                }
+                if ($pokemon->getNombre() === $secondName ) {
+                    $pokemon->setPreEvo($firstName);
+                }
             }
 
-            if ($pokeObj->getNombre() === $secondName ) {
-                $pokeObj->setPreEvo($firstName);
-            }
         }
 
 
@@ -69,13 +79,16 @@ if(isset($_POST["check"])) {
         } else {
             $aImprimir = implode("\n",$lines);
             file_put_contents("admin/pokemons.txt",$aImprimir);
+
             $fp = fopen("admin/pokemonsSerialized.txt","w");
             fwrite($fp,array_a_cadenaurl($pokemons));
             fclose($fp);
+
+            $fp = fopen("admin/usuariosSerialized.txt","w");
+            fwrite($fp,array_a_cadenaurl($usuarios));
+            fclose($fp);
+
         }
-        // echo "<pre>";
-        // print_r($lines);
-        // echo "</pre>";
 
     }
 
@@ -108,7 +121,7 @@ if(isset($_POST["check"])) {
                         $nombrePoke = $datos[0];
                         $nextEvo = $datos[6];
                         $nivel = $datos[7];
-                        if ($nivel != 3 && $nombrePoke != "" && $nextEvo === "null") {
+                        if ($nivel != 3 && $nombrePoke != "") {
                             $cadena .= "<option value='{$nombrePoke}-{$nivel}'>".ucfirst($nombrePoke)." - {$nivel}</option>";
                             $hayDatos1 = true;
                         }
@@ -125,7 +138,7 @@ if(isset($_POST["check"])) {
                         $nombrePoke = $datos[0];
                         $preEvo = $datos[5];
                         $nivel = $datos[7];
-                        if ($nivel != 1 && $nombrePoke != "" && $preEvo === "null") {
+                        if ($nivel != 1 && $nombrePoke != "") {
                             $cadena .= "<option value='{$nombrePoke}-{$nivel}'>".ucfirst($nombrePoke)." - {$nivel}</option>";
                             $hayDatos2 = true;
                         }
