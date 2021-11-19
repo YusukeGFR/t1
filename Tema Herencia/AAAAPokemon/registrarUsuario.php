@@ -81,6 +81,13 @@ if(isset($_POST["check"])) {
             fclose($userPokemons);
             fclose($userTeam);
 
+            $usuarioNuevo->setTotales(0);
+            $usuarioNuevo->setGanadas(0);
+            $usuarioNuevo->setPokeEvoluciones(0);
+
+            $fp = fopen("users/{$newUser}/partidas.txt","a+");
+            fwrite($fp,"0 0 0");
+
             array_push($usuarios,$usuarioNuevo);
             file_put_contents("admin/usuariosSerialized.txt",array_a_cadenaurl($usuarios));
             $mensaje = "Usuario registrado correctamente.";

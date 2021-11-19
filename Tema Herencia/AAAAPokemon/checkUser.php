@@ -1,17 +1,40 @@
 <?php
-if (isset($_POST["botonUsuario"])) {
-
+include_once("usuario.php");
+include_once("funciones.php");
     $loginMessage = "Introduzca sus credenciales de usuario: ";
     $errorMessage = "";
 
-} else if (isset($_GET["error"])) {
+if (isset($_POST["checkUser"])) {
+    $user = $_POST["requestUser"];
+    $pass = $_POST["requestPass"];
+    $correct = false;
 
-    $loginMessage = "Introduzca sus credenciales de usuario: ";
-    $errorMessage = $_GET["error"];
+    $fp = fopen("admin/users.txt","r");
+    while (! feof($fp)) {
+        $line = trim(fgets($fp));
+        $datos = explode("\t",$line);
+        if ($datos[0] == $user && $datos[1] == $pass) {
+            $correct = true;
+        }
+    }
+    fclose($fp);
 
-} else {
-    header("location:paginaPrincipal.php");
+    if (!$correct) {
+        $errorMessage = "Usuario o contraseña incorrectos";
+    } else {
+        $usuarios = cadenaurl_a_array(file_get_contents("admin/usuariosSerialized.txt"));
+
+        foreach($usuarios as $indice => $usuario) {
+            if($usuario->getNombre() == $user) {
+                session_start();
+                $_SESSION["usuario"] = $usuario;
+                header("location:inicio_usuario.php");
+            }
+        }
+        
+    }
 }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +45,7 @@ if (isset($_POST["botonUsuario"])) {
     <title>User Login</title>
 </head>
 <body>
-    <form action="inicio_usuario.php" method="post">
+    <form action="checkUser.php" method="post">
         <p><?= $loginMessage ?></p>
         <p>Nombre</p>
         <input type="text" name="requestUser" id="requestUser">
