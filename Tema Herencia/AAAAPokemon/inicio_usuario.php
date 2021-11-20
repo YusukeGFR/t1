@@ -8,7 +8,6 @@ comprobacion();
     // print_r($user);
     // echo "</pre>";
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

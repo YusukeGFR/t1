@@ -14,7 +14,7 @@ if ($last === "checkAdmin.php") {
             $line = fgets($fp);
             $datos = explode("-",$line);
             if (count($datos) > 1) {
-                array_push($pokemons,new pokemon($datos[0],$datos[1],$datos[2],$datos[3],$datos[4],$datos[5],$datos[6],$datos[7]));
+                array_push($pokemons,new pokemon($datos[0],$datos[1],$datos[2],$datos[3],$datos[4],$datos[5],$datos[6]));
             }
         }
     fclose($fp);

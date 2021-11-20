@@ -25,9 +25,9 @@ if (isset($_POST["checkUser"])) {
         $usuarios = cadenaurl_a_array(file_get_contents("admin/usuariosSerialized.txt"));
         foreach($usuarios as $indice => $usuario) {
             if($usuario->getNombre() == $user) {
-                echo "<pre>";
-                print_r($usuario);
-                echo "</pre>";
+                // echo "<pre>";
+                // print_r($usuario);
+                // echo "</pre>";
                 session_start();
                 $_SESSION["usuario"] = serialize($usuario);
                 header("location:inicio_usuario.php");

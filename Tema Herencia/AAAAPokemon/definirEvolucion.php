@@ -5,7 +5,7 @@ include_once("usuario.php");
 if(isset($_POST["check"])) {
 
     $correctLogin = $_POST["check"];
-    $mensajeError = "";
+    $mensaje = "";
 
     if(isset($_POST["define"])) {
         
@@ -27,26 +27,32 @@ if(isset($_POST["check"])) {
         if ($firstLevel >= $secondLevel || $firstLevel+1 != $secondLevel) {
             $error = true;
         }
+
+        // Bucle para asignar al pokemon seleccionado le evolución seleccionada en el fichero
         for($i = 0; $i < count($lines); $i++) {
             $datos = explode("-",$lines[$i]);
-            
-            if ($datos[0] === $firstName) {
-                $datos[6] = $secondName;
+            if (count($datos) > 1) {
+                if ($datos[5] === $secondName) {
+                    $datos[5] = "null";
+                }
+                if ($datos[0] === $firstName) {
+                    $datos[5] = $secondName;
+                }
             }
-            if ($datos[0] === $secondName) {
-                $datos[5] = $firstName;
-            }
+
             $lines[$i] = implode("-",$datos);
         }
 
+        // Bucle para asignar al pokemon seleccionado le evolución seleccionada en el serialized
         foreach ($pokemons as $indice => $pokeObj) {
+            
+            if ($pokeObj->getNextEvo() === $secondName) {
+                $pokeObj->setNextEvo("null");
+            }
             if ($pokeObj->getNombre() === $firstName ) {
                 $pokeObj->setNextEvo($secondName);
             }
 
-            if ($pokeObj->getNombre() === $secondName ) {
-                $pokeObj->setPreEvo($firstName);
-            }
         }
 
         foreach ($usuarios as $usuario) {
@@ -55,19 +61,19 @@ if(isset($_POST["check"])) {
             $misPokemons = $usuario->getMisPokemons();
 
             foreach ($miEquipo as $pokemon) {
+                if ($pokemon->getNextEvo() === $secondName) {
+                    $pokemon->setNextEvo("null");
+                }
                 if ($pokemon->getNombre() === $firstName ) {
                     $pokemon->setNextEvo($secondName);
-                }
-                if ($pokemon->getNombre() === $secondName ) {
-                    $pokemon->setPreEvo($firstName);
                 }
             }
             foreach ($misPokemons as $pokemon) {
+                if ($pokemon->getNextEvo() === $secondName) {
+                    $pokemon->setNextEvo("null");
+                }
                 if ($pokemon->getNombre() === $firstName ) {
                     $pokemon->setNextEvo($secondName);
-                }
-                if ($pokemon->getNombre() === $secondName ) {
-                    $pokemon->setPreEvo($firstName);
                 }
             }
 
@@ -75,7 +81,7 @@ if(isset($_POST["check"])) {
 
 
         if ($error) {
-            $mensajeError = "Error, vuelva a intentarlo.";
+            $mensaje = "Error, vuelva a intentarlo.";
         } else {
             $aImprimir = implode("\n",$lines);
             file_put_contents("admin/pokemons.txt",$aImprimir);
@@ -88,6 +94,10 @@ if(isset($_POST["check"])) {
             fwrite($fp,array_a_cadenaurl($usuarios));
             fclose($fp);
 
+            $mensaje = "Ahora ".ucfirst($firstName)." evolucionará a ".ucfirst($secondName).". 
+            Aquellos pokemons que préviamente evolucionasen a ".ucfirst($secondName)." 
+            ya no evolucionarán a este.";
+            
         }
 
     }
@@ -119,8 +129,7 @@ if(isset($_POST["check"])) {
                     $datos = explode("-",fgets($fp));
                     if (count($datos) !== 1) {
                         $nombrePoke = $datos[0];
-                        $nextEvo = $datos[6];
-                        $nivel = $datos[7];
+                        $nivel = $datos[6];
                         if ($nivel != 3 && $nombrePoke != "") {
                             $cadena .= "<option value='{$nombrePoke}-{$nivel}'>".ucfirst($nombrePoke)." - {$nivel}</option>";
                             $hayDatos1 = true;
@@ -136,8 +145,7 @@ if(isset($_POST["check"])) {
                     $datos = explode("-",fgets($fp));
                     if (count($datos) !== 1) {
                         $nombrePoke = $datos[0];
-                        $preEvo = $datos[5];
-                        $nivel = $datos[7];
+                        $nivel = $datos[6];
                         if ($nivel != 1 && $nombrePoke != "") {
                             $cadena .= "<option value='{$nombrePoke}-{$nivel}'>".ucfirst($nombrePoke)." - {$nivel}</option>";
                             $hayDatos2 = true;
@@ -156,9 +164,8 @@ if(isset($_POST["check"])) {
                 }
             ?>
            
-        
         <input type="hidden" name="check" id="check" value="<?= $correctLogin ?>">
-        <p><?= $mensajeError ?></p>
+        <p><?= $mensaje ?></p>
     </form>
 </body>
 </html>

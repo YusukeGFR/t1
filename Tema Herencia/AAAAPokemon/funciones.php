@@ -100,7 +100,7 @@ function imprimirTablaPokemons($correctLogin,$pokemons) {
             $linea .= " <td> <p> {$pokeObj->getNivel()}</p> </td>";
 
             $linea .= "<td >";
-            foreach($supported_file as $indice2 => $ext) {
+            foreach($supported_file as $ext) {
                 if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}.{$ext}")) {
                     $dibujado = true;
                     $linea .= "<img src='pokemons/{$nombrePoke}/{$nombrePoke}.{$ext}' >";
@@ -115,7 +115,7 @@ function imprimirTablaPokemons($correctLogin,$pokemons) {
             $linea .= " </td>
                         <td >";
             $dibujado = false;
-            foreach($supported_file as $indice2 => $ext) {
+            foreach($supported_file as $ext) {
                 
                 if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}V.{$ext}")) {
                     $dibujado = true;
@@ -131,7 +131,7 @@ function imprimirTablaPokemons($correctLogin,$pokemons) {
             $linea .= " </td>
                         <td>";
             $dibujado = false;
-            foreach($supported_file as $indice2 => $ext) {
+            foreach($supported_file as $ext) {
                 if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}D.{$ext}")) {
                     $dibujado = true;
                     $linea .= "<img src='pokemons/{$nombrePoke}/{$nombrePoke}D.{$ext}' >";
@@ -159,6 +159,66 @@ function imprimirTablaPokemons($correctLogin,$pokemons) {
             
         }
         echo $linea;
+}
+
+function userPokes($pokemons) {
+    
+    $tabla = "<table border=1>
+                <tr>";
+    
+    foreach($pokemons as $indice => $pokemon) {
+        $nombrePoke = $pokemon->getNombre();
+            $supported_file = ['gif','jpg','jpeg','png'];
+            $tabla .= " <td>
+                            <p>".ucfirst( $nombrePoke )."</p>";
+                            
+            foreach($supported_file as $ext) {
+                if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}.{$ext}")) {
+                    $dibujado = true;
+                    $tabla .= "<p><img src='pokemons/{$nombrePoke}/{$nombrePoke}.{$ext}' ></p>";
+                }
+            }
+            if(!$dibujado) {
+                $tabla .= "<p><img src='pokemons/default.png' width='100px'></p>";
+            }
+
+            $tabla .= "     <p>Ataque: {$pokemon->getAtaque()}</p>
+                            <p>Defensa: {$pokemon->getDefensa()}</p>
+                            <p>Tipos:<img src='images/{$pokemon->getTipo1()}.png'> ";
+            if ($pokemon->getTipo2() !== "null") {
+                $tabla .= "<img src='images/{$pokemon->getTipo2()}.png'>";
+            }
+            $tabla .=      "</p>
+                            <p>Nivel: {$pokemon->getNivel()}</p>
+                            <p>Evoluciona en: ";
+            $pokemon->getNextEvo()=="null"? $tabla .= "Ninguno": $tabla.= ucfirst($pokemon->getNextEvo());
+            $tabla .= "</p>";
+
+            $tabla .= "</td>";
+        if ($indice % 5 == 0 && $indice != 0) {
+            $tabla .= "</tr></tr>";
+        }
+    }
+    
+    $tabla .= "     </tr>
+                </table>";
+    return $tabla;
+}
+
+function desplegablesMisPokes($pokemons,$numero = 1,$pokesActuales) {
+
+    $options = "<select name='pokemon{$numero}'>";
+    foreach($pokemons as $indice => $pokemon) {
+        $options .= "<option value='{$pokemon->getNombre()}'";
+        foreach($pokesActuales as $indice2 => $pokeActual) {
+            if($pokeActual->getNombre() === $pokemon->getNombre() && $numero-1 === $indice2) {
+                $options .= " selected";
+            }
+        }
+       $options .= ">{$pokemon->getNombre()}</option>";
+    }
+    $options .= "</select>";
+    return $options;
 }
 
 function soloLetras($in){
@@ -189,4 +249,264 @@ function cadenaurl_a_array($texto) {
                 $array = unserialize($texto);
             }
             return $array;   
+}
+
+function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
+
+    $multiplicador = 1.0;
+    $misTipos = [$tipo1Propio,$tipo2Propio];
+    $rivalTipos = [$tipo1Rival,$tipo2Rival];
+
+    foreach($misTipos as $miTipo) {
+        switch($miTipo) {
+            case "acero": 
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 2; break;
+                        case "agua": $multiplicador /= 2; break;
+                        case "electrico": $multiplicador /= 2; break;
+                        case "fuego": $multiplicador /= 2; break;
+                        case "hada": $multiplicador *= 2; break;
+                        case "hielo": $multiplicador *= 2;  break;
+                        case "roca": $multiplicador *= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "agua": 
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "agua": $multiplicador /= 2; break;
+                        case "dragon": $multiplicador /= 2; break;
+                        case "fuego": $multiplicador *= 2; break;
+                        case "planta": $multiplicador /= 2; break;
+                        case "roca": $multiplicador *= 2; break;
+                        case "tierra": $multiplicador *= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "bicho":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 2; break;
+                        case "fantasma": $multiplicador /= 2; break;
+                        case "fuego": $multiplicador /= 2; break;
+                        case "hada": $multiplicador /= 2; break;
+                        case "lucha": $multiplicador /= 2; break;
+                        case "planta": $multiplicador *= 2; break;
+                        case "psiquico": $multiplicador *= 2; break;
+                        case "siniestro": $multiplicador *= 2; break;
+                        case "veneno": $multiplicador /= 2; break;
+                        case "volador": $multiplicador /= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "dragon":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 2; break;
+                        case "dragon": $multiplicador *= 2; break;
+                        case "hada": $multiplicador /= 4; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "electrico":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "agua": $multiplicador *= 2; break;
+                        case "dragon": $multiplicador /= 2; break;
+                        case "electrico": $multiplicador /= 2; break;
+                        case "planta": $multiplicador /= 2; break;
+                        case "tierra": $multiplicador /= 4; break;
+                        case "volador": $multiplicador *= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "fantasma":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "fantasma": $multiplicador *= 2; break;
+                        case "normal": $multiplicador /= 4; break;
+                        case "psiquico": $multiplicador *= 2; break;
+                        case "siniestro": $multiplicador /= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "fuego":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador *= 2; break;
+                        case "agua": $multiplicador /= 2; break;
+                        case "bicho": $multiplicador *= 2; break;
+                        case "dragon": $multiplicador /= 2; break;
+                        case "fuego": $multiplicador /= 2; break;
+                        case "hielo": $multiplicador *= 2; break;
+                        case "planta": $multiplicador *= 2; break;
+                        case "roca": $multiplicador /= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "hada":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 2; break;
+                        case "dragon": $multiplicador *= 2; break;
+                        case "fuego": $multiplicador /= 2; break;
+                        case "lucha": $multiplicador *= 2; break;
+                        case "siniestro": $multiplicador *= 2; break;
+                        case "veneno": $multiplicador /= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "hielo":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 2; break;
+                        case "agua": $multiplicador /= 2; break;
+                        case "dragon": $multiplicador *= 2; break;
+                        case "fuego": $multiplicador /= 2; break;
+                        case "hielo": $multiplicador /= 2; break;
+                        case "planta": $multiplicador *= 2; break;
+                        case "tierra": $multiplicador *= 2; break;
+                        case "volador": $multiplicador *= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "lucha":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador *= 2; break;
+                        case "bicho": $multiplicador /= 2; break;
+                        case "fantasma": $multiplicador /= 4; break;
+                        case "hada": $multiplicador /= 2; break;
+                        case "hielo": $multiplicador *= 2; break;
+                        case "normal": $multiplicador *= 2; break;
+                        case "psiquico": $multiplicador /= 2; break;
+                        case "roca": $multiplicador *= 2; break;
+                        case "siniestro": $multiplicador *= 2; break;
+                        case "veneno": $multiplicador /= 2;  break;
+                        case "volador": $multiplicador /= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "normal":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 2; break;
+                        case "fantasma": $multiplicador /= 4; break;
+                        case "roca": $multiplicador /= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "planta":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 2; break;
+                        case "agua": $multiplicador *= 2; break;
+                        case "bicho": $multiplicador /= 2; break;
+                        case "dragon": $multiplicador /= 2; break;
+                        case "fuego": $multiplicador /= 2; break;
+                        case "planta": $multiplicador /= 2; break;
+                        case "roca": $multiplicador *= 2; break;
+                        case "tierra": $multiplicador *= 2; break;
+                        case "veneno": $multiplicador /= 2; break;
+                        case "volador": $multiplicador /= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "psiquico":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 2; break;
+                        case "lucha": $multiplicador *= 2; break;
+                        case "psiquico": $multiplicador /= 2; break;
+                        case "siniestro":$multiplicador /= 4;  break;
+                        case "veneno": $multiplicador *= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "roca": 
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 2; break;
+                        case "bicho": $multiplicador *= 2; break;
+                        case "fuego": $multiplicador *= 2; break;
+                        case "hielo": $multiplicador *= 2; break;
+                        case "tierra": $multiplicador /= 2; break;
+                        case "volador": $multiplicador *= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "siniestro":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "fantasma": $multiplicador *= 2; break;
+                        case "hada": $multiplicador /= 2; break;
+                        case "lucha": $multiplicador /= 2; break;
+                        case "psiquico": $multiplicador *= 2; break;
+                        case "siniestro": $multiplicador /= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "tierra":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador *= 2; break;
+                        case "bicho": $multiplicador /= 2; break;
+                        case "electrico": $multiplicador *= 2; break;
+                        case "fuego": $multiplicador *= 2; break;
+                        case "planta": $multiplicador /= 2; break;
+                        case "roca": $multiplicador *= 2; break;
+                        case "veneno": $multiplicador *= 2; break;
+                        case "volador": $multiplicador /= 4; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "veneno":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 4; break;
+                        case "fantasma": $multiplicador /= 2; break;
+                        case "hada": $multiplicador *= 2; break;
+                        case "planta": $multiplicador *= 2; break;
+                        case "roca": $multiplicador /= 2; break;
+                        case "tierra": $multiplicador /= 2; break;
+                        case "veneno": $multiplicador /= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            case "volador":
+                foreach ($rivalTipos as $rivalTipo) {
+                    switch($rivalTipo) {
+                        case "acero": $multiplicador /= 2; break;
+                        case "bicho": $multiplicador *= 2; break;
+                        case "electrico": $multiplicador /= 2; break;
+                        case "lucha": $multiplicador *= 2; break;
+                        case "planta": $multiplicador *= 2; break;
+                        case "roca": $multiplicador /= 2; break;
+                        default: break;
+                    }
+                }
+                break;
+            default: break;
+        }
+    }
+    
+    return $multiplicador;
 }

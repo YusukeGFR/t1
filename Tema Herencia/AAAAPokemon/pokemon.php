@@ -7,18 +7,16 @@ class pokemon {
     private $defensa;
     private $tipo1;
     private $tipo2;
-    private $preEvo;
     private $nextEvo;
     private $nivel;
 
-    public function __construct($nombre,$ataque,$defensa,$tipo1,$tipo2,$preEvo,$nextEvo,$nivel) {
+    public function __construct($nombre,$ataque,$defensa,$tipo1,$tipo2,$nextEvo,$nivel) {
 
         $this->nombre = $nombre;
         $this->ataque = $ataque;
         $this->defensa = $defensa;
         $this->tipo1 = $tipo1;
         $this->tipo2 = $tipo2;
-        $this->preEvo = $preEvo;
         $this->nextEvo = $nextEvo;
         $this->nivel = $nivel;
     }
@@ -79,18 +77,6 @@ class pokemon {
     public function setTipo2($tipo2)
     {
         $this->tipo2 = $tipo2;
-
-        return $this;
-    }
-
-    public function getPreEvo()
-    {
-        return $this->preEvo;
-    }
-
-    public function setPreEvo($preEvo)
-    {
-        $this->preEvo = $preEvo;
 
         return $this;
     }

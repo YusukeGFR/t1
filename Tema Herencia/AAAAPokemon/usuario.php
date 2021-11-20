@@ -75,7 +75,7 @@ class Usuario {
 
     public function setTotales($totales)
     {
-        $this->totales = $totales;
+        $this->totales += $totales;
 
         return $this;
     }
@@ -87,7 +87,7 @@ class Usuario {
 
     public function setGanadas($ganadas)
     {
-        $this->ganadas = $ganadas;
+        $this->ganadas += $ganadas;
 
         return $this;
     }
@@ -99,7 +99,7 @@ class Usuario {
 
     public function setPokeEvoluciones($pokeEvoluciones)
     {
-        $this->pokeEvoluciones = $pokeEvoluciones;
+        $this->pokeEvoluciones += $pokeEvoluciones;
 
         return $this;
     }

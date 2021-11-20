@@ -45,13 +45,13 @@ if(isset($_POST["check"])) {
             $error = "Ha ocurrido un error, el pokemon no se añadirá.";
         }else{
             $fp = fopen("admin/pokemons.txt","a");
-            fwrite($fp,"{$nombre}-{$ataque}-{$defensa}-{$tipo1}-{$tipo2}-null-null-{$nivel}\n");
+            fwrite($fp,"{$nombre}-{$ataque}-{$defensa}-{$tipo1}-{$tipo2}-null-{$nivel}\n");
             fclose($fp);
             mkdir("pokemons/$nombre",755);
             $fp = fopen("pokemons/{$nombre}/.gitkeep","w");
             fclose($fp);
             $mensaje = "Pokemon dado de alta correctamente.";
-            array_push($pokemons,new pokemon($nombre,$ataque,$defensa,$tipo1,$tipo2,"null","null",$nivel));
+            array_push($pokemons,new pokemon($nombre,$ataque,$defensa,$tipo1,$tipo2,"null",$nivel));
             $fp = fopen("admin/pokemonsSerialized.txt","w");
             fwrite($fp,array_a_cadenaurl($pokemons));
             fclose($fp);
