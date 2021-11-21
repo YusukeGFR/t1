@@ -38,17 +38,21 @@ if (isset($_POST["botonAdmin"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login Admin</title>
+    <link rel="stylesheet" href="styleAdmin.css">
 </head>
 <body>
-    <form action="checkAdmin.php" method="post">
-        <p><?= $loginMessage ?></p>
-        <p>Nombre</p>
-        <input type="text" name="requestName" id="requestName">
-        <p>Contraseña</p>
-        <input type="password" name="requestPass" id="requestPass">
-        <input type="submit" value="Iniciar Sesión" name="check" id="check">
-        <p><?= $errorMessage ?></p>
-    </form>
+    <h1>Login Admin</h1>
+    <div class="form-container">
+        <form action="checkAdmin.php" method="post">
+            <p><?= $loginMessage ?></p>
+            <p>Nombre</p>
+            <input type="text" name="requestName" id="requestName">
+            <p>Contraseña</p>
+            <input type="password" name="requestPass" id="requestPass"> <br>
+            <input type="submit" value="Iniciar Sesión" name="check" id="check">
+            <p id="error"><?= $errorMessage ?></p>
+        </form>
+    </div>
 </body>
 </html>

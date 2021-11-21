@@ -2,6 +2,7 @@
 include_once('pokemon.php');
 function imprimirMenu($correctLogin) {
     $menu = "
+    <div id='adminMenu'>
     <form action='registrarUsuario.php' method='post'>
         <input type='submit' value='Registrar Usuario' name='button1'>
         <input type='hidden' name='check' value='$correctLogin'>
@@ -23,7 +24,8 @@ function imprimirMenu($correctLogin) {
     </form>
     <form action='paginaPrincipal.php' method='post'>
         <input type='submit' value='Desconectar' name='button5'>
-    </form>";
+    </form>
+    </div>";
     return $menu;
 }
 

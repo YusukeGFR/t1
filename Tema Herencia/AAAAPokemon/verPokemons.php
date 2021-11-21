@@ -21,12 +21,14 @@ if(isset($_POST["check"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ver Pokemons</title>
+    <link rel="stylesheet" href="styleAdmin.css">
 </head>
 <body>
     <?= imprimirMenu($correctLogin) ?>
-    <hr>
-    <?= imprimirTablaPokemons($correctLogin,$pokemons)?>
-
+    
+    <div id="table_Pokemons">
+        <?= imprimirTablaPokemons($correctLogin,$pokemons)?>
+    </div>
 
 
 

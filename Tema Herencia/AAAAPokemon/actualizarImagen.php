@@ -52,25 +52,28 @@ if(isset($_POST["check"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar Imagenes</title>
+    <link rel="stylesheet" href="styleAdmin.css">
 </head>
 <body>
 <?= imprimirMenu($correctLogin) ?>
-    <hr>
-    <?= $modificando ?>
-<form action="actualizarImagen.php" method="post" enctype="multipart/form-data">
-    <p> Imagen Principal <input type="file" name="principal"> </p>
-    <p> Imagen Victoria <input type="file" name="victoria"> </p>
-    <p> Imagen Derrota <input type="file" name="derrota"> </p>
-    <p> <input type="submit" value="Actualizar"> </p>
-    <input type='hidden' value='<?=$correctLogin?>' name='check'>
-    <input type='hidden' value='<?=$name?>' name='name'>
-</form>
+
+    <div class="form-container">
+        <p id="notice"> <?= $modificando ?> </p>
+        <form action="actualizarImagen.php" method="post" enctype="multipart/form-data">
+        <p> Imagen Principal <input type="file" name="principal"> </p>
+        <p> Imagen Victoria <input type="file" name="victoria"> </p>
+        <p> Imagen Derrota <input type="file" name="derrota"> </p>
+        <p> <input type="submit" value="Actualizar"> </p>
+        <input type='hidden' value='<?=$correctLogin?>' name='check'>
+        <input type='hidden' value='<?=$name?>' name='name'>
+        </form>
+    
 
 <?php
 for($i = 0; $i < count($arrayResults);$i++) {
-    echo $arrayResults[$i]."<br>";
+    echo "<p id='notice'>".$arrayResults[$i]."</p>";
 }
 ?>
-
+</div>
 </body>
 </html>

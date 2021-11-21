@@ -46,7 +46,7 @@ if(isset($_POST["check"])) {
         if($yaExiste) {
             $error = "El usuario ya existe";
         } else if($errorDatos) {
-            $error = "Datos incompletos";
+            $error = "Datos incompletos o erróneos";
         } else {
             $fp = fopen("admin/users.txt","a");
             fwrite($fp,"{$newUser}\t{$newPass}\n");
@@ -112,19 +112,21 @@ if(isset($_POST["check"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario</title>
+    <link rel="stylesheet" href="styleAdmin.css">
 </head>
 <body>
     <?= imprimirMenu($correctLogin) ?>
-    <hr>
+    <div class="form-container">
     <form action="registrarUsuario.php" method="post">
         <p>Nombre del nuevo usuario</p>
         <input type="text" name="newUser" id="newUser">
         <p>Contraseña del nuevo usuario</p>
-        <input type="text" name="newPass" id="newPass">
+        <input type="text" name="newPass" id="newPass"> <br>
         <input type="submit" value="Registar" name="new" id="new">
         <input type="hidden" name="check" id="check" value="<?= $correctLogin ?>">
-        <p><?= $error ?></p>
-        <p><?= $mensaje ?></p>
+        <p id="error"><?= $error ?></p>
+        <p id="notice"><?= $mensaje ?></p>
     </form>
+    </div>
 </body>
 </html>

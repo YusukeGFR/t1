@@ -94,9 +94,9 @@ if(isset($_POST["check"])) {
             fwrite($fp,array_a_cadenaurl($usuarios));
             fclose($fp);
 
-            $mensaje = "Ahora ".ucfirst($firstName)." evolucionará a ".ucfirst($secondName).". 
-            Aquellos pokemons que préviamente evolucionasen a ".ucfirst($secondName)." 
-            ya no evolucionarán a este.";
+            $mensaje = "Ahora ".ucfirst($firstName)." evolucionará a ".ucfirst($secondName).".<br> 
+            <p id='small_Notice'>Aquellos pokemons que préviamente evolucionasen a ".ucfirst($secondName)." 
+            ya no evolucionarán a este.</p>";
             
         }
 
@@ -115,15 +115,16 @@ if(isset($_POST["check"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Definir Evolucion</title>
+    <link rel="stylesheet" href="styleAdmin.css">
 </head>
 <body>
     <?= imprimirMenu($correctLogin) ?>
-    <hr>
+    <div class="form-container">
     <form action="definirEvolucion.php" method="post">
             <?php
                 $hayDatos1 = false;
-                $cadena = " <p>Defina la evolución de un pokemon</p>
-                            <p><select name='first' id='first'>";
+                $cadena = " <p id='notice'>Defina la evolución de un pokemon</p>
+                            <p id='notice'> <select name='first' id='first'>";
                 $fp = fopen("admin/pokemons.txt","r");
                 while (! feof($fp)) {
                     $datos = explode("-",fgets($fp));
@@ -137,7 +138,7 @@ if(isset($_POST["check"])) {
                     }
                 }
                 fclose($fp);
-                $cadena .= "</select>➞
+                $cadena .= "</select> evoluciona a 
                             <select name='second' id='second'>";
                 $hayDatos2 = false;
                 $fp = fopen("admin/pokemons.txt","r");
@@ -165,7 +166,8 @@ if(isset($_POST["check"])) {
             ?>
            
         <input type="hidden" name="check" id="check" value="<?= $correctLogin ?>">
-        <p><?= $mensaje ?></p>
+        <p id='notice'><?= $mensaje ?></p>
     </form>
+    </div>
 </body>
 </html>

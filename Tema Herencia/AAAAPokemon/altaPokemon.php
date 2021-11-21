@@ -69,16 +69,19 @@ if(isset($_POST["check"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta Pokemon</title>
+    <link rel="stylesheet" href="styleAdmin.css">
 </head>
 <body>
     <?= imprimirMenu($correctLogin) ?>
-    <hr>
+    <div class="form-container">
     <form action="altaPokemon.php" method="post">
         <p>Nombre del nuevo pokemon</p>
         <input type="text" name="nombre" id="nombre">
         <p>
-            Ataque <input type="number" name="ataque" id="ataque">
-            Defensa <input type="number" name="defensa" id="defensa">
+            Ataque 
+            <input type="number" name="ataque" id="ataque"><br> <br>
+            Defensa 
+            <input type="number" name="defensa" id="defensa"><br>
         </p>
         <p>Seleccion de Tipos</p>
         <p>
@@ -110,8 +113,9 @@ if(isset($_POST["check"])) {
         <p> 1<input type="radio" name="level" id="one" value="1" checked> 2<input type="radio" name="level" id="two" value="2"> 3<input type="radio" name="level" id="three" value="3"></p>
         <input type="submit" value="Registar" name="new" id="new">
         <input type="hidden" name="check" id="check" value="<?= $correctLogin ?>">
-        <p><?= $error ?></p>
-        <p><?= $mensaje ?></p>
+        <p id="error"><?= $error ?></p>
+        <p id="notice"><?= $mensaje ?></p>
     </form>
+    </div>
 </body>
 </html>
