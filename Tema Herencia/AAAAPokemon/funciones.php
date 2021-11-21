@@ -41,10 +41,10 @@ function menuUsuario() {
         <input type='submit' value='Jugar Partida' name='button3'>
     </form>
 
-    <form action='pokeevolucionar.php' method='post'>
+    <form action='poke_evolucionar.php' method='post'>
         <input type='submit' value='Evolucionar un Pokémon' name='button4'>
     </form>
-    <form action='paginaPrincipal.php' method='post'>
+    <form action='desconectar.php' method='post'>
         <input type='submit' value='Desconectar' name='button5'>
     </form>";
     return $menu;
@@ -193,10 +193,9 @@ function userPokes($pokemons) {
                             <p>Evoluciona en: ";
             $pokemon->getNextEvo()=="null"? $tabla .= "Ninguno": $tabla.= ucfirst($pokemon->getNextEvo());
             $tabla .= "</p>";
-
             $tabla .= "</td>";
-        if ($indice % 5 == 0 && $indice != 0) {
-            $tabla .= "</tr></tr>";
+        if (($indice+1) % 6 == 0 && $indice != 0) {
+            $tabla .= "</tr><tr>";
         }
     }
     
@@ -253,7 +252,7 @@ function cadenaurl_a_array($texto) {
 
 function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
 
-    $multiplicador = 1.0;
+    $bono = 1.0;
     $misTipos = [$tipo1Propio,$tipo2Propio];
     $rivalTipos = [$tipo1Rival,$tipo2Rival];
 
@@ -262,13 +261,13 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "acero": 
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 2; break;
-                        case "agua": $multiplicador /= 2; break;
-                        case "electrico": $multiplicador /= 2; break;
-                        case "fuego": $multiplicador /= 2; break;
-                        case "hada": $multiplicador *= 2; break;
-                        case "hielo": $multiplicador *= 2;  break;
-                        case "roca": $multiplicador *= 2; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "agua": $bono -= 0.15; break;
+                        case "electrico": $bono -= 0.15; break;
+                        case "fuego": $bono -= 0.15; break;
+                        case "hada": $bono += 0.15; break;
+                        case "hielo": $bono += 0.15;  break;
+                        case "roca": $bono += 0.15; break;
                         default: break;
                     }
                 }
@@ -276,12 +275,12 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "agua": 
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "agua": $multiplicador /= 2; break;
-                        case "dragon": $multiplicador /= 2; break;
-                        case "fuego": $multiplicador *= 2; break;
-                        case "planta": $multiplicador /= 2; break;
-                        case "roca": $multiplicador *= 2; break;
-                        case "tierra": $multiplicador *= 2; break;
+                        case "agua": $bono -= 0.15; break;
+                        case "dragon": $bono -= 0.15; break;
+                        case "fuego": $bono += 0.15; break;
+                        case "planta": $bono -= 0.15; break;
+                        case "roca": $bono += 0.15; break;
+                        case "tierra": $bono += 0.15; break;
                         default: break;
                     }
                 }
@@ -289,16 +288,16 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "bicho":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 2; break;
-                        case "fantasma": $multiplicador /= 2; break;
-                        case "fuego": $multiplicador /= 2; break;
-                        case "hada": $multiplicador /= 2; break;
-                        case "lucha": $multiplicador /= 2; break;
-                        case "planta": $multiplicador *= 2; break;
-                        case "psiquico": $multiplicador *= 2; break;
-                        case "siniestro": $multiplicador *= 2; break;
-                        case "veneno": $multiplicador /= 2; break;
-                        case "volador": $multiplicador /= 2; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "fantasma": $bono -= 0.15; break;
+                        case "fuego": $bono -= 0.15; break;
+                        case "hada": $bono -= 0.15; break;
+                        case "lucha": $bono -= 0.15; break;
+                        case "planta": $bono += 0.15; break;
+                        case "psiquico": $bono += 0.15; break;
+                        case "siniestro": $bono += 0.15; break;
+                        case "veneno": $bono -= 0.15; break;
+                        case "volador": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -306,9 +305,9 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "dragon":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 2; break;
-                        case "dragon": $multiplicador *= 2; break;
-                        case "hada": $multiplicador /= 4; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "dragon": $bono += 0.15; break;
+                        case "hada": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -316,12 +315,12 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "electrico":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "agua": $multiplicador *= 2; break;
-                        case "dragon": $multiplicador /= 2; break;
-                        case "electrico": $multiplicador /= 2; break;
-                        case "planta": $multiplicador /= 2; break;
-                        case "tierra": $multiplicador /= 4; break;
-                        case "volador": $multiplicador *= 2; break;
+                        case "agua": $bono += 0.15; break;
+                        case "dragon": $bono -= 0.15; break;
+                        case "electrico": $bono -= 0.15; break;
+                        case "planta": $bono -= 0.15; break;
+                        case "tierra": $bono -= 0.15; break;
+                        case "volador": $bono += 0.15; break;
                         default: break;
                     }
                 }
@@ -329,10 +328,10 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "fantasma":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "fantasma": $multiplicador *= 2; break;
-                        case "normal": $multiplicador /= 4; break;
-                        case "psiquico": $multiplicador *= 2; break;
-                        case "siniestro": $multiplicador /= 2; break;
+                        case "fantasma": $bono += 0.15; break;
+                        case "normal": $bono -= 0.15; break;
+                        case "psiquico": $bono += 0.15; break;
+                        case "siniestro": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -340,14 +339,14 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "fuego":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador *= 2; break;
-                        case "agua": $multiplicador /= 2; break;
-                        case "bicho": $multiplicador *= 2; break;
-                        case "dragon": $multiplicador /= 2; break;
-                        case "fuego": $multiplicador /= 2; break;
-                        case "hielo": $multiplicador *= 2; break;
-                        case "planta": $multiplicador *= 2; break;
-                        case "roca": $multiplicador /= 2; break;
+                        case "acero": $bono += 0.15; break;
+                        case "agua": $bono -= 0.15; break;
+                        case "bicho": $bono += 0.15; break;
+                        case "dragon": $bono -= 0.15; break;
+                        case "fuego": $bono -= 0.15; break;
+                        case "hielo": $bono += 0.15; break;
+                        case "planta": $bono += 0.15; break;
+                        case "roca": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -355,12 +354,12 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "hada":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 2; break;
-                        case "dragon": $multiplicador *= 2; break;
-                        case "fuego": $multiplicador /= 2; break;
-                        case "lucha": $multiplicador *= 2; break;
-                        case "siniestro": $multiplicador *= 2; break;
-                        case "veneno": $multiplicador /= 2; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "dragon": $bono += 0.15; break;
+                        case "fuego": $bono -= 0.15; break;
+                        case "lucha": $bono += 0.15; break;
+                        case "siniestro": $bono += 0.15; break;
+                        case "veneno": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -368,14 +367,14 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "hielo":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 2; break;
-                        case "agua": $multiplicador /= 2; break;
-                        case "dragon": $multiplicador *= 2; break;
-                        case "fuego": $multiplicador /= 2; break;
-                        case "hielo": $multiplicador /= 2; break;
-                        case "planta": $multiplicador *= 2; break;
-                        case "tierra": $multiplicador *= 2; break;
-                        case "volador": $multiplicador *= 2; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "agua": $bono -= 0.15; break;
+                        case "dragon": $bono += 0.15; break;
+                        case "fuego": $bono -= 0.15; break;
+                        case "hielo": $bono -= 0.15; break;
+                        case "planta": $bono += 0.15; break;
+                        case "tierra": $bono += 0.15; break;
+                        case "volador": $bono += 0.15; break;
                         default: break;
                     }
                 }
@@ -383,17 +382,17 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "lucha":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador *= 2; break;
-                        case "bicho": $multiplicador /= 2; break;
-                        case "fantasma": $multiplicador /= 4; break;
-                        case "hada": $multiplicador /= 2; break;
-                        case "hielo": $multiplicador *= 2; break;
-                        case "normal": $multiplicador *= 2; break;
-                        case "psiquico": $multiplicador /= 2; break;
-                        case "roca": $multiplicador *= 2; break;
-                        case "siniestro": $multiplicador *= 2; break;
-                        case "veneno": $multiplicador /= 2;  break;
-                        case "volador": $multiplicador /= 2; break;
+                        case "acero": $bono += 0.15; break;
+                        case "bicho": $bono -= 0.15; break;
+                        case "fantasma": $bono -= 0.15; break;
+                        case "hada": $bono -= 0.15; break;
+                        case "hielo": $bono += 0.15; break;
+                        case "normal": $bono += 0.15; break;
+                        case "psiquico": $bono -= 0.15; break;
+                        case "roca": $bono += 0.15; break;
+                        case "siniestro": $bono += 0.15; break;
+                        case "veneno": $bono -= 0.15;  break;
+                        case "volador": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -401,9 +400,9 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "normal":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 2; break;
-                        case "fantasma": $multiplicador /= 4; break;
-                        case "roca": $multiplicador /= 2; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "fantasma": $bono -= 0.15; break;
+                        case "roca": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -411,16 +410,16 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "planta":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 2; break;
-                        case "agua": $multiplicador *= 2; break;
-                        case "bicho": $multiplicador /= 2; break;
-                        case "dragon": $multiplicador /= 2; break;
-                        case "fuego": $multiplicador /= 2; break;
-                        case "planta": $multiplicador /= 2; break;
-                        case "roca": $multiplicador *= 2; break;
-                        case "tierra": $multiplicador *= 2; break;
-                        case "veneno": $multiplicador /= 2; break;
-                        case "volador": $multiplicador /= 2; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "agua": $bono += 0.15; break;
+                        case "bicho": $bono -= 0.15; break;
+                        case "dragon": $bono -= 0.15; break;
+                        case "fuego": $bono -= 0.15; break;
+                        case "planta": $bono -= 0.15; break;
+                        case "roca": $bono += 0.15; break;
+                        case "tierra": $bono += 0.15; break;
+                        case "veneno": $bono -= 0.15; break;
+                        case "volador": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -428,11 +427,11 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "psiquico":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 2; break;
-                        case "lucha": $multiplicador *= 2; break;
-                        case "psiquico": $multiplicador /= 2; break;
-                        case "siniestro":$multiplicador /= 4;  break;
-                        case "veneno": $multiplicador *= 2; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "lucha": $bono += 0.15; break;
+                        case "psiquico": $bono -= 0.15; break;
+                        case "siniestro":$bono -= 0.15;  break;
+                        case "veneno": $bono += 0.15; break;
                         default: break;
                     }
                 }
@@ -440,12 +439,12 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "roca": 
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 2; break;
-                        case "bicho": $multiplicador *= 2; break;
-                        case "fuego": $multiplicador *= 2; break;
-                        case "hielo": $multiplicador *= 2; break;
-                        case "tierra": $multiplicador /= 2; break;
-                        case "volador": $multiplicador *= 2; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "bicho": $bono += 0.15; break;
+                        case "fuego": $bono += 0.15; break;
+                        case "hielo": $bono += 0.15; break;
+                        case "tierra": $bono -= 0.15; break;
+                        case "volador": $bono += 0.15; break;
                         default: break;
                     }
                 }
@@ -453,11 +452,11 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "siniestro":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "fantasma": $multiplicador *= 2; break;
-                        case "hada": $multiplicador /= 2; break;
-                        case "lucha": $multiplicador /= 2; break;
-                        case "psiquico": $multiplicador *= 2; break;
-                        case "siniestro": $multiplicador /= 2; break;
+                        case "fantasma": $bono += 0.15; break;
+                        case "hada": $bono -= 0.15; break;
+                        case "lucha": $bono -= 0.15; break;
+                        case "psiquico": $bono += 0.15; break;
+                        case "siniestro": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -465,14 +464,14 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "tierra":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador *= 2; break;
-                        case "bicho": $multiplicador /= 2; break;
-                        case "electrico": $multiplicador *= 2; break;
-                        case "fuego": $multiplicador *= 2; break;
-                        case "planta": $multiplicador /= 2; break;
-                        case "roca": $multiplicador *= 2; break;
-                        case "veneno": $multiplicador *= 2; break;
-                        case "volador": $multiplicador /= 4; break;
+                        case "acero": $bono += 0.15; break;
+                        case "bicho": $bono -= 0.15; break;
+                        case "electrico": $bono += 0.15; break;
+                        case "fuego": $bono += 0.15; break;
+                        case "planta": $bono -= 0.15; break;
+                        case "roca": $bono += 0.15; break;
+                        case "veneno": $bono += 0.15; break;
+                        case "volador": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -480,13 +479,13 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "veneno":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 4; break;
-                        case "fantasma": $multiplicador /= 2; break;
-                        case "hada": $multiplicador *= 2; break;
-                        case "planta": $multiplicador *= 2; break;
-                        case "roca": $multiplicador /= 2; break;
-                        case "tierra": $multiplicador /= 2; break;
-                        case "veneno": $multiplicador /= 2; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "fantasma": $bono -= 0.15; break;
+                        case "hada": $bono += 0.15; break;
+                        case "planta": $bono += 0.15; break;
+                        case "roca": $bono -= 0.15; break;
+                        case "tierra": $bono -= 0.15; break;
+                        case "veneno": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -494,12 +493,12 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
             case "volador":
                 foreach ($rivalTipos as $rivalTipo) {
                     switch($rivalTipo) {
-                        case "acero": $multiplicador /= 2; break;
-                        case "bicho": $multiplicador *= 2; break;
-                        case "electrico": $multiplicador /= 2; break;
-                        case "lucha": $multiplicador *= 2; break;
-                        case "planta": $multiplicador *= 2; break;
-                        case "roca": $multiplicador /= 2; break;
+                        case "acero": $bono -= 0.15; break;
+                        case "bicho": $bono += 0.15; break;
+                        case "electrico": $bono -= 0.15; break;
+                        case "lucha": $bono += 0.15; break;
+                        case "planta": $bono += 0.15; break;
+                        case "roca": $bono -= 0.15; break;
                         default: break;
                     }
                 }
@@ -508,5 +507,5 @@ function clash($tipo1Propio,$tipo2Propio,$tipo1Rival,$tipo2Rival){
         }
     }
     
-    return $multiplicador;
+    return $bono;
 }
