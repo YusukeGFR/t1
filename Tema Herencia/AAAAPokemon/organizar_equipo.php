@@ -19,7 +19,7 @@ comprobacion();
         }
 
         if (!$error) {
-            // Cogemos los pokemons que hay en el fichero del usuario
+            // Actualizamos los pokemons que hay en el fichero del usuario
             file_put_contents("users/{$user->getNombre()}/equipo_usuario.txt","{$pokemon1}\n{$pokemon2}\n{$pokemon3}\n");
 
             $nuevoEquipo = [];

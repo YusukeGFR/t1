@@ -153,37 +153,45 @@ if (isset($_POST["combatir"])) {
             array_push($misPokesNombres,$poke->getNombre());
         }
 
-        // Esto sacará un numero al azar de 0 hasta la longitud total de pokemons registrados, si este no lo tiene el usuario y es de nivel 1 se añade
-        // Si este los tiene todos la aplicación entra en un bucle infinito, lo siento :(
-        do {
-            $rand = rand(0,count($pokemons)-1);
-        } while ( in_array($pokemons[$rand]->getNombre(),$misPokesNombres) || $pokemons[$rand]->getNivel() != 1);
-
-        // Recorro el aray de usuarios para asignar al usuario actual el nuevo pokemon, aparte del usuario actual.
-        foreach($usuarios as $indice => $usuario) {
-            if($usuario->getNombre() === $user->getNombre()) {
-
-                // añadimos el pokemons generado al array de los nuevos del usuario
-                array_push($misPokes,$pokemons[$rand]);
-                // Y se lo asignamos
-                $user->setMisPokemons($misPokes);
-                // Mostramos un mensaje
-                $cada10Jugadas = "<p>Has obtenido un pokemon nuevo! Su nombre es {$pokemons[$rand]->getNombre()}</p>";
-                $dibujado = false;
-                foreach($supported_file as $ext) {
-                    if (file_exists("pokemons/{$pokemons[$rand]->getNombre()}/{$pokemons[$rand]->getNombre()}.{$ext}") && !$dibujado) {
-                        $dibujado = true;
-                        $cada10Jugadas .= "<p><img src='pokemons/{$pokemons[$rand]->getNombre()}/{$pokemons[$rand]->getNombre()}.{$ext}' ></p>";
-                    }
-                }
-                if(!$dibujado) {
-                    $cada10Jugadas .= "<p><img src='pokemons/default.png' width='100px'></p>";
-                }
-
-                // Actualizamos el usuario en el array de usuario y lo serializamos de nuevo.
-                $usuarios[$indice] = $user;
-                file_put_contents("admin/usuariosSerialized.txt",array_a_cadenaurl($usuarios));
+        $pokesUno = [];
+        foreach($pokemons as $indice => $pokemon) {
+            if ($pokemon->getNivel() == 1 && in_array($pokemon->getNombre(),$misPokesNombres) == false) {
+                array_push($pokesUno,$indice);
             }
+        }
+
+        if (count($pokesUno) != 0) {
+            $rand = array_rand($pokesUno,1);
+            $rand = $pokesUno[$rand];
+        
+            // Recorro el aray de usuarios para asignar al usuario actual el nuevo pokemon, aparte del usuario actual de session.
+            foreach($usuarios as $indice => $usuario) {
+                if($usuario->getNombre() === $user->getNombre()) {
+
+                    // añadimos el pokemons generado al array de los nuevos del usuario
+                    array_push($misPokes,$pokemons[$rand]);
+                    // Y se lo asignamos
+                    $user->setMisPokemons($misPokes);
+                    // Mostramos un mensaje
+                    $cada10Jugadas = "<p>Has obtenido un pokemon nuevo! Su nombre es {$pokemons[$rand]->getNombre()}</p>";
+                    $dibujado = false;
+                    foreach($supported_file as $ext) {
+                        if (file_exists("pokemons/{$pokemons[$rand]->getNombre()}/{$pokemons[$rand]->getNombre()}.{$ext}") && !$dibujado) {
+                            $dibujado = true;
+                            $cada10Jugadas .= "<p><img src='pokemons/{$pokemons[$rand]->getNombre()}/{$pokemons[$rand]->getNombre()}.{$ext}' ></p>";
+                        }
+                    }
+                    if(!$dibujado) {
+                        $cada10Jugadas .= "<p><img src='pokemons/default.png' width='100px'></p>";
+                    }
+
+                    // Actualizamos el usuario en el array de usuario y lo serializamos de nuevo.
+                    $usuarios[$indice] = $user;
+                    file_put_contents("admin/usuariosSerialized.txt",array_a_cadenaurl($usuarios));
+                }
+            }
+        } else {
+            $cada10Jugadas = "<p>Ya tienes todos los pokemons!</p>";
         }
     }
 

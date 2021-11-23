@@ -41,7 +41,7 @@ if(isset($_POST["check"])) {
     }
 
 } else {
-    header("location:paginaPrincipal.php");
+    header("location:index.php");
 }
 
 ?>

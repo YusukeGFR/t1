@@ -11,9 +11,6 @@ $pokemonsCanEvolute = 0;
 $showEvolution = "";
 
 
-
-
-
 if (isset($_POST["evolucionar"])) {
     $numEvoluciones--;
     $chosen = explode("-",$_POST["pokeChosen"])[0];
@@ -43,6 +40,18 @@ if (isset($_POST["evolucionar"])) {
         }
     }
     $user->setMisPokemons($misPokemons);
+
+    // Actualizar mi equipo
+    foreach($miEquipo as $indice => $miPokemon) {
+        if ($miPokemon->getNombre() === $chosen) {
+            $miEquipo[$indice] = $evolucionObj;
+        }
+    }
+    $user->setMiEquipo($miEquipo);
+
+    // Actualizar tokens evoluciones
+    $user->setPokeEvoluciones(-1);
+
 
     // Actualizar fichero pokemons_usuario.txt
     $fp = fopen("users/{$user->getNombre()}/pokemons_usuario.txt","r");
@@ -75,17 +84,7 @@ if (isset($_POST["evolucionar"])) {
     file_put_contents("users/{$user->getNombre()}/equipo_usuario.txt",$content);
 
 
-    // Actualizar mi equipo
-    foreach($miEquipo as $indice => $miPokemon) {
-        if ($miPokemon->getNombre() === $chosen) {
-            $miEquipo[$indice] = $evolucionObj;
-        }
-    }
-    $user->setMiEquipo($miEquipo);
-
-    // Actualizar tokens evoluciones
-    $user->setPokeEvoluciones(-1);
-
+    
     // Actualizar fichero partidas.txt
     $fp = fopen("users/{$user->getNombre()}/partidas.txt","w");
     $content = "{$user->getTotales()}-{$user->getGanadas()}-{$user->getPokeEvoluciones()}\n";

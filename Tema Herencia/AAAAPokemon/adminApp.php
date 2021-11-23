@@ -22,7 +22,7 @@ if ($last === "checkAdmin.php") {
     file_put_contents("admin/pokemonsSerialized.txt",array_a_cadenaurl($pokemons));
 
 } else {
-    header("location:paginaPrincipal.php");
+    header("location:index.php");
 }
     
 

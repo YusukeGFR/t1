@@ -58,6 +58,9 @@ if (isset($_POST["checkUser"])) {
             <input type="submit" value="Iniciar Sesión" name="checkUser" id="checkUser">
             <p id="error"><?= $errorMessage ?></p>
         </form>
+        <form action="index.php" method="post">
+            <input type="submit" value="Volver">
+        </form>
     </div>
 </body>
 </html>

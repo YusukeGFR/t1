@@ -53,3 +53,4 @@ starly-101-58-normal-volador-staravia-1
 staravia-142-94-normal-volador-staraptor-2
 staraptor-234-140-normal-volador-null-3
 vaporeon-123-132-agua-null-null-2
+pikachu-58-43-electrico-null-null-1

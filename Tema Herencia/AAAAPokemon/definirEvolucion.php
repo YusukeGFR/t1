@@ -39,27 +39,22 @@ if(isset($_POST["check"])) {
                     $datos[5] = $secondName;
                 }
             }
-
             $lines[$i] = implode("-",$datos);
         }
 
         // Bucle para asignar al pokemon seleccionado le evolución seleccionada en el serialized
         foreach ($pokemons as $indice => $pokeObj) {
-            
             if ($pokeObj->getNextEvo() === $secondName) {
                 $pokeObj->setNextEvo("null");
             }
             if ($pokeObj->getNombre() === $firstName ) {
                 $pokeObj->setNextEvo($secondName);
             }
-
         }
 
         foreach ($usuarios as $usuario) {
-
             $miEquipo = $usuario->getMiEquipo();
             $misPokemons = $usuario->getMisPokemons();
-
             foreach ($miEquipo as $pokemon) {
                 if ($pokemon->getNextEvo() === $secondName) {
                     $pokemon->setNextEvo("null");
@@ -76,7 +71,6 @@ if(isset($_POST["check"])) {
                     $pokemon->setNextEvo($secondName);
                 }
             }
-
         }
 
 
@@ -104,7 +98,7 @@ if(isset($_POST["check"])) {
 
 
 } else {
-    header("location:paginaPrincipal.php");
+    header("location:index.php");
 }
 
 ?>

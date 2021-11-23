@@ -22,7 +22,7 @@ function imprimirMenu($correctLogin) {
         <input type='submit' value='Ver Pokemons' name='button4'>
         <input type='hidden' name='check' value='$correctLogin'>
     </form>
-    <form action='paginaPrincipal.php' method='post'>
+    <form action='index.php' method='post'>
         <input type='submit' value='Desconectar' name='button5'>
     </form>
     </div>";
@@ -57,7 +57,7 @@ function menuUsuario() {
 function comprobacion() {
     session_start();
     if (!isset($_SESSION["usuario"])) {
-        header("location:paginaPrincipal.php");
+        header("location:index.php");
     }
 }
 
@@ -105,7 +105,7 @@ function imprimirTablaPokemons($correctLogin,$pokemons) {
 
             $linea .= "<td >";
             foreach($supported_file as $ext) {
-                if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}.{$ext}")) {
+                if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}.{$ext}") && !$dibujado) {
                     $dibujado = true;
                     $linea .= "<img src='pokemons/{$nombrePoke}/{$nombrePoke}.{$ext}' >";
                 }
@@ -121,7 +121,7 @@ function imprimirTablaPokemons($correctLogin,$pokemons) {
             $dibujado = false;
             foreach($supported_file as $ext) {
                 
-                if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}V.{$ext}")) {
+                if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}V.{$ext}") && !$dibujado) {
                     $dibujado = true;
                     $linea .= "<img src='pokemons/{$nombrePoke}/{$nombrePoke}V.{$ext}' >";
                 }
@@ -136,7 +136,7 @@ function imprimirTablaPokemons($correctLogin,$pokemons) {
                         <td>";
             $dibujado = false;
             foreach($supported_file as $ext) {
-                if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}D.{$ext}")) {
+                if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}D.{$ext}") && !$dibujado) {
                     $dibujado = true;
                     $linea .= "<img src='pokemons/{$nombrePoke}/{$nombrePoke}D.{$ext}' >";
                 }

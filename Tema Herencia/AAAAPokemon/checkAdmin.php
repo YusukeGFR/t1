@@ -27,7 +27,7 @@ if (isset($_POST["botonAdmin"])) {
     }
 
 } else {
-    header("location:paginaPrincipal.php");
+    header("location:index.php");
 }
  
 
@@ -42,7 +42,6 @@ if (isset($_POST["botonAdmin"])) {
     <link rel="stylesheet" href="styleAdmin.css">
 </head>
 <body>
-    <h1>Login Admin</h1>
     <div class="form-container">
         <form action="checkAdmin.php" method="post">
             <p><?= $loginMessage ?></p>
@@ -52,6 +51,9 @@ if (isset($_POST["botonAdmin"])) {
             <input type="password" name="requestPass" id="requestPass"> <br>
             <input type="submit" value="Iniciar Sesión" name="check" id="check">
             <p id="error"><?= $errorMessage ?></p>
+        </form>
+        <form action="index.php" method="post">
+            <input type="submit" value="Volver">
         </form>
     </div>
 </body>

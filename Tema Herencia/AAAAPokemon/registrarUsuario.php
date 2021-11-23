@@ -39,7 +39,7 @@ if(isset($_POST["check"])) {
             }
         }
 
-        if($newUser === "" || !soloLetras($newUser)) {
+        if($newUser === "" || $newPass === "" || !soloLetras($newUser)) {
             $errorDatos = true;
         }
 
@@ -100,7 +100,7 @@ if(isset($_POST["check"])) {
     }
 
 } else {
-    header("location:paginaPrincipal.php");
+    header("location:index.php");
 }
 
 
