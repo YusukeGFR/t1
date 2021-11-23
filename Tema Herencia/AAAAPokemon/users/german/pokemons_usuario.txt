@@ -9,4 +9,5 @@ mothim
 lopunny
 lopunny
 cherrim
-infernape
+chimchar
+combee

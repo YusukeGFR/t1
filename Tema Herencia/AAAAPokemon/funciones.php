@@ -31,24 +31,26 @@ function imprimirMenu($correctLogin) {
 
 function menuUsuario() {
     $menu = "
-    <form action='ver_mis_pokemons.php' method='post'>
-        <input type='submit' value='Ver mis Pokémons' name='button1'>
-    </form>
+    <div id='userMenu'>
+        <form action='ver_mis_pokemons.php' method='post'>
+            <input type='submit' value='Ver mis Pokémons' name='button1'>
+        </form>
 
-    <form action='organizar_equipo.php' method='post'>
-        <input type='submit' value='Organizar mi Equipo' name='button2'>
-    </form>
+        <form action='organizar_equipo.php' method='post'>
+            <input type='submit' value='Organizar mi Equipo' name='button2'>
+        </form>
 
-    <form action='jugar_partida.php' method='post'>
-        <input type='submit' value='Jugar Partida' name='button3'>
-    </form>
+        <form action='jugar_partida.php' method='post'>
+            <input type='submit' value='Jugar Partida' name='button3'>
+        </form>
 
-    <form action='poke_evolucionar.php' method='post'>
-        <input type='submit' value='Evolucionar un Pokémon' name='button4'>
-    </form>
-    <form action='desconectar.php' method='post'>
-        <input type='submit' value='Desconectar' name='button5'>
-    </form>";
+        <form action='poke_evolucionar.php' method='post'>
+            <input type='submit' value='Evolucionar un Pokémon' name='button4'>
+        </form>
+        <form action='desconectar.php' method='post'>
+            <input type='submit' value='Desconectar' name='button5'>
+        </form>
+    </div>";
     return $menu;
 }
 

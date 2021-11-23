@@ -45,16 +45,19 @@ if (isset($_POST["checkUser"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login</title>
+    <link rel="stylesheet" href="styleUser.css">
 </head>
 <body>
+    <div class="form-container">
     <form action="checkUser.php" method="post">
         <p><?= $loginMessage ?></p>
         <p>Nombre</p>
         <input type="text" name="requestUser" id="requestUser">
         <p>Contraseña</p>
-        <input type="password" name="requestPass" id="requestPass">
+        <input type="password" name="requestPass" id="requestPass"> <br>
         <input type="submit" value="Iniciar Sesión" name="checkUser" id="checkUser">
-        <p><?= $errorMessage ?></p>
+        <p id="error"><?= $errorMessage ?></p>
     </form>
+    </div>
 </body>
 </html>
