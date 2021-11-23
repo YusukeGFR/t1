@@ -19,7 +19,6 @@ comprobacion();
     <link rel="stylesheet" href="styleUser.css">
 </head>
 <body>
-
     <?= $menu ?>
 </body>
 </html>

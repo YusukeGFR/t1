@@ -10,11 +10,7 @@ $numEvoluciones = $user->getPokeEvoluciones();
 $pokemonsCanEvolute = 0;
 $showEvolution = "";
 
-foreach($misPokemons as $miPokemon) {
-    if ($miPokemon->getNextEvo() !== "null") {
-        $pokemonsCanEvolute++;
-    }
-}
+
 
 
 
@@ -141,6 +137,11 @@ if (isset($_POST["evolucionar"])) {
     $_SESSION["usuario"] = serialize($user);
 }
 
+foreach($misPokemons as $miPokemon) {
+    if ($miPokemon->getNextEvo() !== "null") {
+        $pokemonsCanEvolute++;
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -150,35 +151,44 @@ if (isset($_POST["evolucionar"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evolucionar</title>
+    <link rel="stylesheet" href="styleUser.css">
 </head>
 <body>
 <?= menuUsuario() ?>
-    <hr>
-    <h2>Evolucionar un pokemon costará 1 token de evolución.</h3>
-    <h3>Tokens disponibles: <?=$numEvoluciones?></h4>
-    <?php 
-        if($numEvoluciones > 0 && $pokemonsCanEvolute !== 0) { ?>
-    <form action="poke_evolucionar.php" method="post">
-        <select name="pokeChosen">
-            <?php
-            foreach($misPokemons as $miPokemon) {
-                if ($miPokemon->getNextEvo() !== "null") {
-                    echo "<option value='{$miPokemon->getNombre()}-{$miPokemon->getNextEvo()}'>{$miPokemon->getNombre()} 🡆 {$miPokemon->getNextEvo()}</option>";
+
+<div class="battle">
+    <div class="battle-form">
+        <div class="info">
+        <h4>Evolucionar un pokemon costará 1 token de evolución</h4>
+        <h3>Tokens disponibles: <?=$numEvoluciones?></h4>
+        <?php 
+            if($numEvoluciones > 0 && $pokemonsCanEvolute !== 0) { ?>
+        <form action="poke_evolucionar.php" method="post">
+            <select name="pokeChosen">
+                <?php
+                foreach($misPokemons as $miPokemon) {
+                    if ($miPokemon->getNextEvo() !== "null") {
+                        echo "<option value='{$miPokemon->getNombre()}-{$miPokemon->getNextEvo()}'>{$miPokemon->getNombre()} 🡆 {$miPokemon->getNextEvo()}</option>";
+                    }
                 }
-            }
-            ?>
-        </select>
-        <input type="submit" value="Evolucionar" name="evolucionar">
-    </form>
-    <?= $showEvolution ?>
+                ?>
+            </select>
+            <input type="submit" value="Evolucionar" name="evolucionar">
+        </form>
+            
+        <?= $showEvolution ?>
     <?php 
         }
         if ($numEvoluciones === 0) {
+            echo $showEvolution;
             echo "<h4>No tienes tokens de evolucion! Gana partidas para conseguir tokens!</h4>";
         }
         if ($pokemonsCanEvolute === 0) {
+            echo $showEvolution;
             echo "<h4>No tienes ningún pokemon que pueda evolucionar! Juega partidas para conseguir pokemons nuevos!</h4>";
         }
     ?>
+    </div>
+</div>
 </body>
 </html>

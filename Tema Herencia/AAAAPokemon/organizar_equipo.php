@@ -60,22 +60,27 @@ comprobacion();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizar Equipo</title>
+    <link rel="stylesheet" href="styleUser.css">
 </head>
 <body>
     <?= menuUsuario() ?>
-    <hr>
-    <?= $tabla ?>
-    <form action="organizar_equipo.php" method="post">
-        <p>
-            Pokemon 1: 
-            <?= desplegablesMisPokes($misPokemons,1,$equipoPokemon); ?>
-            Pokemon 2:
-            <?= desplegablesMisPokes($misPokemons,2,$equipoPokemon); ?>
-            Pokemon 3: 
-            <?= desplegablesMisPokes($misPokemons,3,$equipoPokemon); ?>
-        </p>
-        <input type="submit" value="Actualizar Equipo" name="update">
-    </form>
+
+    <div id="table_Equipo">
+        <?= $tabla ?>
+    </div>
+    <div class="under-form">
+        <form action="organizar_equipo.php" method="post">
+            <p>
+                Pokemon 1: 
+                <?= desplegablesMisPokes($misPokemons,1,$equipoPokemon); ?>
+                Pokemon 2:
+                <?= desplegablesMisPokes($misPokemons,2,$equipoPokemon); ?>
+                Pokemon 3: 
+                <?= desplegablesMisPokes($misPokemons,3,$equipoPokemon); ?>
+            </p>
+            <input type="submit" value="Actualizar Equipo" name="update">
+        </form>
+    </div>
     <?= $mensaje ?>
 </body>
 </html>

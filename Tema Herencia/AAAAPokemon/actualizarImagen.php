@@ -66,7 +66,7 @@ if(isset($_POST["check"])) {
         <p> <input type="submit" value="Actualizar"> </p>
         <input type='hidden' value='<?=$correctLogin?>' name='check'>
         <input type='hidden' value='<?=$name?>' name='name'>
-        </form>
+    </form>
     
 
 <?php

@@ -115,7 +115,7 @@ if (isset($_POST["combatir"])) {
                     <table border=1>
                     <tr>
                         <td>{$tusDatos}</td>
-                        <td> <img src='images/vs.png' width=100px> </td>
+                        <td class='vs-image'> <img src='images/vs.png' width=100px> </td>
                         <td>{$rivalDatos}</td>
                     </tr>
                     </table>";
@@ -216,38 +216,51 @@ if (isset($_POST["combatir"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jugar Partida</title>
+    <link rel="stylesheet" href="styleUser.css">
 </head>
 <body>
 <?= menuUsuario() ?>
-    <hr>
-    <form action="jugar_partida.php" method="post">
-        <p>Entrenador rival: 
-            <select name="rival">
-                <option value="aleatorio">Aleatorio</option>
-            <?php
-                foreach ($usuarios as $usuario) {
-                    if ($usuario->getNombre() !== $user->getNombre()) {
-                        echo "<option value='{$usuario->getNombre()}'>{$usuario->getNombre()}</option>";
+    
+<div class="battle">
+    <div class="battle-form">
+        <form action="jugar_partida.php" method="post">
+            <p>Entrenador rival: 
+                <select name="rival">
+                    <option value="aleatorio">Aleatorio</option>
+                <?php
+                    foreach ($usuarios as $usuario) {
+                        if ($usuario->getNombre() !== $user->getNombre()) {
+                            echo "<option value='{$usuario->getNombre()}'>{$usuario->getNombre()}</option>";
+                        }
                     }
-                }
-            ?>
-            </select>
-            <input type="submit" value="Combatir" name="combatir">
-        </p> 
-    </form>
-
-    <?= $estadoActualUser ?>
-    <br>
-    <?= $cada10Jugadas ?>
-    <br>
-    <?= $cada10Ganadas ?>
-    <br>
-    <?= $matchResult ?>
-    <h1><?= $cabezeraEnfrentamiento ?></h1>
-    <?php
-        foreach($rondas as $ronda) {
-            echo $ronda;
-        }
-    ?>
+                ?>
+                </select> <br>
+                <input type="submit" value="Combatir" name="combatir">
+            </p> 
+        </form>
+    </div>
+    <div class="battle-clash">
+        <div id="resume"> 
+            <h3><?= $matchResult ?></h3>
+            
+            <p><?= $cada10Jugadas ?></p> 
+            
+           
+            <p> <?= $cada10Ganadas ?></p> 
+            
+            
+            <p> <?= $estadoActualUser ?> </p> 
+        </div>
+        <hr>
+        <br>
+        <h2 id="match-title"><?= $cabezeraEnfrentamiento ?></h2>
+        <br>
+        <?php
+            foreach($rondas as $ronda) {
+                echo $ronda;
+            }
+        ?>
+    </div>
+</div>
 </body>
 </html>

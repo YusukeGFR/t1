@@ -174,7 +174,7 @@ function userPokes($pokemons) {
         $nombrePoke = $pokemon->getNombre();
             $supported_file = ['gif','jpg','jpeg','png'];
             $tabla .= " <td>
-                            <p>".ucfirst( $nombrePoke )."</p>";
+                            <p>".ucfirst( $nombrePoke )."</p> <hr>";
                             
             foreach($supported_file as $ext) {
                 if (file_exists("pokemons/{$nombrePoke}/{$nombrePoke}.{$ext}")) {

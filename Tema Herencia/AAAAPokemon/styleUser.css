@@ -7,16 +7,13 @@
 }
 
 html {
-    width: 100vw;
     height: 100vh;
     font-family: Comfortaa;
 }
 
 body{
-    height: 100vh;
     background-image: url("images/AAadmin.jpg");
     background-size: cover;
-    position: relative;
 }
 
 h1 {
@@ -37,9 +34,8 @@ h1 {
     border-radius: 20px;
     text-align: left;
     position: absolute;
-    top: 20%;
     left: 50%;
-    transform: translate(-50%);
+    transform: translate(-50%,10%);
     box-shadow: 10px 10px;
 }
 
@@ -94,6 +90,13 @@ input[type=submit] {
     letter-spacing: 1px;
     cursor: pointer;
     box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    position: relative;
+}
+
+input[type=submit]:hover {
+    box-shadow: 0px 0px 0px 0px;
+    top: 5px;
+    left: 5px;
 }
 
 .form-container input[type=submit] {
@@ -111,7 +114,7 @@ input[type=submit] {
     position: relative;
 }
 
-input[type=submit]:hover {
+.form-container input[type=submit]:hover {
     box-shadow: 0px 0px 0px 0px;
     top: 5px;
     left: 51%;
@@ -135,7 +138,6 @@ input[type=submit]:hover {
     text-align: center;
     background-color: rgba(255, 255, 255, 0.809);
     padding-bottom: 20px;
-    width: 100%;
 }
 
 #userMenu form{
@@ -147,7 +149,6 @@ input[type=submit]:hover {
 #userMenu input[type=submit] {
     left:0;
     transform: none;
-    position: relative;
 }
 
 #userMenu input[type=submit]:hover {
@@ -156,12 +157,28 @@ input[type=submit]:hover {
     left: 5px;
 }
 
-#table_Pokemons {
-    /* padding: 20px;
-    width: 40%;
-    margin: 30px 5% 30px 2%;
-    padding: 20px 5% 20px 5%; */
-    position: relative;
+#explicacion {
+    width: 80%;
+    padding: 20px 5% 20px 5%;
+    margin: 30px 5% 0 5%;
+    background-color: rgba(255, 255, 255, 0.809);
+    border-radius: 50px;
+}
+
+#explicacion h2 {
+    text-align: center;
+    font-size: 2em;
+}
+
+.explanation_text {
+    letter-spacing: -0.5px;
+}
+
+
+#arrow {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
 }
 
 #table_Pokemons table {
@@ -170,7 +187,6 @@ input[type=submit]:hover {
     margin: 30px 0 0 0;
     left: 50%;
     transform: translate(-50%);
-
 }
 
 #table_Pokemons td {
@@ -178,6 +194,7 @@ input[type=submit]:hover {
     font-size: 1.3em;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.809);
+    vertical-align: top;
 }
 
 
@@ -188,6 +205,7 @@ input[type=submit]:hover {
 
 #table_Pokemons input[type=submit] {
     box-shadow: none;
+    position: unset;
     margin: 1px;
     letter-spacing: -0.5px;
 }
@@ -200,3 +218,151 @@ input[type=submit]:hover {
     margin: 1px;
     letter-spacing: -0.5px;
 }
+
+#table_Equipo table {
+    width: 60%;
+    position: absolute;
+    margin: 30px 0 0 0;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#table_Equipo td {
+    width: 100px;
+    font-size: 1.0em;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.809);
+    vertical-align: top;
+}
+
+#table_Equipo img {
+    max-width: 120px;
+    margin: 5px;
+}
+
+#table_Equipo input[type=submit] {
+    box-shadow: none;
+    position: unset;
+    margin: 1px;
+    letter-spacing: -0.5px;
+}
+
+.under-form {
+    background-color: rgba(255, 255, 255, 0.809);
+    padding: 40px;
+    border-radius: 30px;
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,50%);
+}
+
+.under-form select{
+    background-color: rgba(255, 255, 255, 0.809);
+}
+
+/* Jugar Partida */
+.battle {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin: 30px 10% 50px 10%;
+}
+
+.battle {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin: 30px 10% 50px 10%;
+}
+
+.battle img {
+    max-width: 200px;
+}
+
+#resume {
+    padding: 40px 0 40px 0;
+    letter-spacing: -0.5px;
+}
+
+#resume h3 {
+    font-size: 3.5em;
+    color: hsl(219, 62%, 30%);
+    text-shadow: 2px 0 rgb(0, 0, 0) ;
+}
+
+.battle-form {
+    background-color: rgba(255, 255, 255, 0.809);
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+.battle-clash {
+    background-color: rgba(255, 255, 255, 0.809);
+    border-radius: 20px;
+    width: 60%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 0 30px 0 30px;
+}
+
+.battle-clash table{
+    width: 100%;
+    border: 1px solid transparent;
+    margin-bottom: 70px;
+}
+
+.battle-clash table td{
+    width: 33%;
+}
+
+#match-title {
+    font-size: 2.5em;
+    
+}
+
+.vs-image img {
+    width: 70%;
+}
+
+.battle .info {
+    padding: 30px;
+}
+.battle .info h4{
+    margin-top: 20px;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1200px) {
+    #table_Pokemons td {
+        width: 80px;
+        font-size: 0.8em;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.809);
+    }
+}
+
+
+
+
+
+
+
+
+
+

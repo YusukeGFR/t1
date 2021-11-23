@@ -19,7 +19,7 @@ comprobacion();
 </head>
 <body>
     <?= menuUsuario() ?>
-
+    
     <div id="table_Pokemons">
         <?= $tabla ?>
     </div>

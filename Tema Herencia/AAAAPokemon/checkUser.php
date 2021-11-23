@@ -49,15 +49,15 @@ if (isset($_POST["checkUser"])) {
 </head>
 <body>
     <div class="form-container">
-    <form action="checkUser.php" method="post">
-        <p><?= $loginMessage ?></p>
-        <p>Nombre</p>
-        <input type="text" name="requestUser" id="requestUser">
-        <p>Contraseña</p>
-        <input type="password" name="requestPass" id="requestPass"> <br>
-        <input type="submit" value="Iniciar Sesión" name="checkUser" id="checkUser">
-        <p id="error"><?= $errorMessage ?></p>
-    </form>
+        <form action="checkUser.php" method="post">
+            <p><?= $loginMessage ?></p>
+            <p>Nombre</p>
+            <input type="text" name="requestUser" id="requestUser">
+            <p>Contraseña</p>
+            <input type="password" name="requestPass" id="requestPass"> <br>
+            <input type="submit" value="Iniciar Sesión" name="checkUser" id="checkUser">
+            <p id="error"><?= $errorMessage ?></p>
+        </form>
     </div>
 </body>
 </html>
