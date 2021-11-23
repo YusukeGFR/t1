@@ -29,9 +29,13 @@ bronzong
 staraptor
 rampardos
 honchkrow
+<<<<<<< HEAD
 vespiquen
 luxray
 bronzong
 monferno
 turtwig
 floatzel
+=======
+kricketune
+>>>>>>> 0b4d10a2aa514d9a6987ce85bbce2981c46710fc

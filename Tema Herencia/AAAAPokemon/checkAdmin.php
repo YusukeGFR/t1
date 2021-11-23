@@ -42,18 +42,27 @@ if (isset($_POST["botonAdmin"])) {
     <link rel="stylesheet" href="styleAdmin.css">
 </head>
 <body>
+<<<<<<< HEAD
     <div class="form-container">
+=======
+    <h1>Login Admin</h1>
+    <div class="form-container1">
+>>>>>>> 0b4d10a2aa514d9a6987ce85bbce2981c46710fc
         <form action="checkAdmin.php" method="post">
             <p><?= $loginMessage ?></p>
             <p>Nombre</p>
             <input type="text" name="requestName" id="requestName">
             <p>Contraseña</p>
-            <input type="password" name="requestPass" id="requestPass"> <br>
-            <input type="submit" value="Iniciar Sesión" name="check" id="check">
+            <input type="password" name="requestPass" id="requestPass"> 
+            <div> <input type="submit" value="Iniciar Sesión" name="check" id="check"></div>
             <p id="error"><?= $errorMessage ?></p>
         </form>
         <form action="index.php" method="post">
+<<<<<<< HEAD
             <input type="submit" value="Volver">
+=======
+            <div><input type="submit" value="Volver" name="volver"></div>
+>>>>>>> 0b4d10a2aa514d9a6987ce85bbce2981c46710fc
         </form>
     </div>
 </body>
